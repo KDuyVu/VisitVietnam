@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PhotoService {
+export class CityService {
   private data: string[] = [];
-  photoUrls: string[];
+  private photoUrls: string[];
+  private cityInfo: string;
 
   constructor() {
     this.photoUrls = [
@@ -19,9 +20,19 @@ export class PhotoService {
         'assets/DN/DN7.jpg',
         'assets/DN/DN8.jpg',
     ]
+
+    this.cityInfo = "Da Nang is the hometown of Sinh and Duy"
   }
 
   getPhotoUrlsOfCity(city: string): Observable<string[]> {
     return of(this.photoUrls);
+  }
+
+  getCityInfoByName(city: string): Observable<string> {
+    return of(this.cityInfo);
+  }
+
+  getCityInfoById(city: string): Observable<string> {
+    return of(this.cityInfo);
   }
 }

@@ -1,10 +1,18 @@
-<div class="page-container-div">
+<div 
+    class="page-container-div"
+    (click)="clicked()"
+>
+    <app-info-container [city]="city"> </app-info-container>
     <div class="map-div">
         <svg [attr.viewBox]="viewBox">
-            <path style="fill:#000000" *ngFor="let entry of mapEntries" [attr.d]="entry.d" [attr.title]="entry.title"
-                [attr.id]="entry.id" (click)="onClick(entry, $event)" (mouseenter)="onMouseEnter()"
-                (mouseleave)="onMouseLeave()" />
+            <path *ngFor="let entry of mapEntries"
+                [attr.d]="entry.d"
+                [attr.title]="entry.title"
+                [attr.id]="entry.id"
+                (click)="onClick(entry, $event)"
+                [ngClass]="{'active': isSelected(entry)}"
+            />
         </svg>
     </div>
-    <app-info-container [city]="city"></app-info-container>
+    <app-photo-container [city]="city"></app-photo-container>
 </div>

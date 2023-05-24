@@ -17,14 +17,14 @@ export class MapComponent implements OnInit, AfterViewInit{
   viewBox: string;
   mapEntries: MapEntry[] = [];
   isHovering: boolean = false;
-  city: string = "";
-  
+  city: string = null;
 
   constructor(
     private dataSvc: DataService,
     private cdr: ChangeDetectorRef) {
       this.mapEntries = this.dataSvc.getData();
   }
+
   ngOnInit(): void {
   }
 
@@ -34,11 +34,8 @@ export class MapComponent implements OnInit, AfterViewInit{
     this.bboxHeight = this.bbox.height;
     this.x = this.bbox.x;
     this.y = this.bbox.y;
-    console.log(this.x, ' ', this.y, ' ', this.bboxWidth, ' ', this.bboxHeight);
     this.viewBox = `${this.x} ${this.y} ${this.bboxWidth} ${this.bboxHeight}`;
     this.cdr.detectChanges();
-    const infoBoxDiv = document.querySelector('app-info-container') as HTMLDivElement;
-    console.log("what ",infoBoxDiv.offsetWidth);
   }
 
   onClick(data: MapEntry, event: any) {
@@ -47,12 +44,11 @@ export class MapComponent implements OnInit, AfterViewInit{
     this.city = data.title;
   }
 
-  onMouseLeave(): void {
-    this.isHovering = false;
+  isSelected(data: MapEntry) {
+    return this.city === data.title;
   }
 
-  onMouseEnter(): void {
-    //this.isHovering = true;
-    //this.city = 
+  clicked() {
+    console.log("ok");
   }
 }
