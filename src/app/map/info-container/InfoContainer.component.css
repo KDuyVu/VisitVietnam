@@ -1,0 +1,34 @@
+.info-panel-div {
+    border-radius: 5px;
+    background-color:aquamarine;
+}
+
+.info-panel-title-div {
+    font-size: 7px;
+    padding: 3px;
+    text-align: center;
+}
+
+.img-container-div {
+    display: flex;
+    justify-content: center;
+    border-bottom: 5px solid transparent;
+}
+
+.img-container-div div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 5px;
+    width: calc((100% - 20px) / 3);
+    vertical-align: center;
+}
+
+.img-container-div div:last-child {
+    padding-right: 5px;
+}
+
+.img-container-div img {
+    max-width: 100%;
+    max-height: 100%;
+}
