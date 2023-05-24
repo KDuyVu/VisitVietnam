@@ -1,0 +1,28 @@
+div.page-container-div {
+    height: 100%;
+    display: flex;
+}
+
+div.map-div {
+    height: 100%;
+}
+
+svg {
+    width: 100%;
+    transform: scale(0.84);
+}
+
+path:hover {
+    opacity: 0.5;
+}
+
+app-info-container {
+    display: flex;
+    max-width: 40%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.map-div {
+    display: inline-flex;
+}
