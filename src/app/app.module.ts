@@ -4,19 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { DataService } from './service/DateService.service';
-import { PhotoService } from './service/PhotoService.service';
-import { InfoContainerComponent } from './map/info-container/InfoContainer.component';
+import { CityService } from './service/CityService.service';
+import { PhotoContainerComponent } from './map/photo-container/PhotoContainer.component';
+import { InfoContainer } from './map/info-container/InfoContainer.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    InfoContainerComponent
+    PhotoContainerComponent,
+    InfoContainer
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatIconModule
   ],
-  providers: [DataService, PhotoService],
+  providers: [DataService, CityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

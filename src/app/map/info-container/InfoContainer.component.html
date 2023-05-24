@@ -1,12 +1,11 @@
-<div class="info-container-div">
-    <div class="info-panel-div" id="info-panel-id">
-        <div class="info-panel-title-div">
-            Series of photo albums taken in {{city}}
-        </div>
-        <div *ngFor="let row of photoUrls" class="img-container-div">
-            <div *ngFor="let photoUrl of row">
-                <img [src]="photoUrl" alt="My image">
-            </div>
-        </div>
+<div    
+    class="info-container"
+    *ngIf="city !== null"
+>
+    <div class="title">
+        <div>Brief information about {{city}} </div>
+    </div>
+    <div class="info-div">
+        {{cityInfo}}
     </div>
 </div>
