@@ -1,0 +1,8 @@
+input {
+    width: 15em;
+}
+
+nz-input-group {
+    margin-left: 2em;
+    width: 15em;
+}

@@ -7,12 +7,12 @@ import { CityService } from "src/app/service/CityService.service";
   templateUrl: './PhotoContainer.component.html',
   styleUrls: ['./PhotoContainer.component.css']
 })
-export class PhotoContainerComponent implements OnInit, AfterViewInit, OnDestroy{
+export class PhotoContainerComponent implements OnInit, OnDestroy{
   @Input() city: string;
   x: any;
   y: any;
   viewBox: string;
-  isHovering: boolean = false;
+  isHovering = false;
   imgWidth: number;
   photoSubscription: Subscription;
   photoUrls: string[][] = [];
@@ -35,18 +35,6 @@ export class PhotoContainerComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnDestroy(): void {
     this.photoSubscription.unsubscribe();
-  }
-
-  ngAfterViewInit(): void {
-  }
-
-  onMouseLeave(): void {
-    this.isHovering = false;
-  }
-
-  onMouseEnter(): void {
-    //this.isHovering = true;
-    //this.city = 
   }
 
   private processPhotoUrls(photos: string[]) {

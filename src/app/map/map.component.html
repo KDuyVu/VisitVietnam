@@ -1,8 +1,11 @@
-<div 
-    class="page-container-div"
-    (click)="clicked()"
->
-    <app-info-container [city]="city"> </app-info-container>
+<div>
+    <app-search-bar
+        [(selectedCity)]="selectedCity"
+        (cityChanged)="onCityChanged($event)"></app-search-bar> 
+</div>
+
+<div class="page-container-div">
+    <app-info-container [city]="selectedCity"> </app-info-container>
     <div class="map-div">
         <svg [attr.viewBox]="viewBox">
             <path *ngFor="let entry of mapEntries"
@@ -14,5 +17,5 @@
             />
         </svg>
     </div>
-    <app-photo-container [city]="city"></app-photo-container>
+    <app-photo-container [city]="selectedCity"></app-photo-container>
 </div>
