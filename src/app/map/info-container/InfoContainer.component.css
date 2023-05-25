@@ -3,21 +3,21 @@
     flex-direction: column;
     justify-content: center;
     width: 35%;
-    border-right: 5px;
-    border-left: 5px;
-    box-sizing: content-box;
-    font-size: 7px;
+    padding-left: 1em;
 }
 
 .info-container {
     background-color: aquamarine;
+    box-sizing: border-box;
     padding: 0.5em;
-    border-radius: 4px;
+    border-radius: 2em;
 }
 
 .title {
     justify-content: center;
     color:rgb(254, 147, 6);
+    font-size: 2em;
+    font-weight: bold;
     display: flex;
 }
 .title div {
@@ -27,10 +27,7 @@
 
 .info-div {
     border-top: 0.5em solid transparent;
-    font-size: 5px;
+    text-align: center;
+    font-size: 1.5em;
     font-weight: 500;
-}
-
-mat-icon {
-    padding: 2px;
 }

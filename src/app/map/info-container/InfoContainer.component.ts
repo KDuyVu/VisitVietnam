@@ -6,9 +6,9 @@ import { CityService } from "src/app/service/CityService.service";
     templateUrl: "./InfoContainer.component.html",
     styleUrls: ["./InfoContainer.component.css"]
 })
-export class InfoContainer{
-    @Input() city: string = "";
-    cityInfo: string = "";
+export class InfoContainerComponent{
+    @Input() city = "";
+    cityInfo = "";
     constructor(
         private cityService: CityService
     ) {
