@@ -24,7 +24,7 @@
     "csv-writer": "^1.6.0",
     "fast-csv": "^4.3.6",
     "fs": "^0.0.1-security",
-    "ng-zorro-antd": "^15.1.0",
+    "ng-zorro-antd": "^16.0.0-beta.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
