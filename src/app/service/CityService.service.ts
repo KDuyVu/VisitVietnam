@@ -22,7 +22,7 @@ export class CityService {
       'assets/DN/DN8.jpg',
     ]
 
-    this.cityInfo = "Da Nang is the hometown of Sinh and Duy"
+    this.cityInfo = "City info goes here"
   }
 
   getPhotoUrlsOfCity(city: string): Observable<string[]> {
