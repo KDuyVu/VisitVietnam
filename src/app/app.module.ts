@@ -23,6 +23,13 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { ListCitiesComponent } from './Homepage/list-cities/list-cities/ListCities.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { CityCardComponent } from './Homepage/list-cities/city-card/CityCard.component';
+import { HomepageComponent } from './Homepage/list-cities/Homepage.component';
+import { FilterBarComponent } from './Homepage/list-cities/filter-bar/FilterBar.component';
+import { TagComponent } from './Homepage/list-cities/filter-bar/tag/Tag.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 registerLocaleData(en);
 
@@ -32,7 +39,12 @@ registerLocaleData(en);
     MapComponent,
     PhotoContainerComponent,
     InfoContainerComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    HomepageComponent,
+    CityCardComponent,
+    ListCitiesComponent,
+    FilterBarComponent,
+    TagComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +59,9 @@ registerLocaleData(en);
     NzIconModule,
     FormsModule,
     HttpClientModule,
-    NzAutocompleteModule
+    NzAutocompleteModule,
+    NzPaginationModule,
+    NzButtonModule,
   ],
   providers: [DataService, CityService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
