@@ -1,0 +1,3 @@
+<div class="app-wrapper">
+    <app-tag *ngFor="let tag of tags" [tag]="tag" (click)="onClickTag(tag)" [selected]="isSelected(tag)"> </app-tag>
+</div>

@@ -1,7 +1,7 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable, map, startWith } from "rxjs";
-import { CityService } from "src/app/service/CityService.service";
+import { City, CityService } from "src/app/service/CityService.service";
 
 @Component({
     selector: "app-search-bar",
@@ -22,8 +22,8 @@ export class SearchBarComponent implements OnInit {
         private cityService:  CityService
     ) {
         this.cityService.getAllCities().subscribe(
-            (result: string[]) => {
-                this.cityNames = result;
+            (result: City[]) => {
+                this.cityNames = result.map(city => city.cityName);
             }
         )
     }
