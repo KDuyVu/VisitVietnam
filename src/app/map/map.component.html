@@ -7,11 +7,11 @@
 <div class="page-container-div">
     <app-info-container [city]="selectedCity"> </app-info-container>
     <div class="map-div">
-        <svg [attr.viewBox]="viewBox">
+        <svg viewBox="0.9999892711639404 1.000034213066101 998.0000610351562 2096.599853515625">
             <path *ngFor="let entry of mapEntries"
-                [attr.d]="entry.d"
-                [attr.title]="entry.title"
-                [attr.id]="entry.id"
+                [attr.d]="entry.cssVector"
+                [attr.title]="entry.cityName"
+                [attr.id]="entry.cityId"
                 (click)="onClick(entry, $event)"
                 [ngClass]="{'active': isSelected(entry)}"
             />

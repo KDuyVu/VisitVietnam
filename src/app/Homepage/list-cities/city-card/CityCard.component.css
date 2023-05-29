@@ -73,7 +73,7 @@ img:first-child {
     margin-top: 1em;
 }
 
-.footnote-div:last-child:not(:only-child) {
+.footnote-div:not(:first-child) {
     margin-top: 0em;
 }
 

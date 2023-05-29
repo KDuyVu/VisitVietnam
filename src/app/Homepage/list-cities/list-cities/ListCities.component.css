@@ -20,7 +20,7 @@
 }
 
 .photo-container-wrapper{
-    width: 70%;
+    width: 80%;
     margin: auto;
 }
 
@@ -51,7 +51,12 @@ app-city-card {
 }
 
 .show-more-wrapper button {
-    background-color: aqua;
+    border-color: blueviolet;
+    margin: 1em;
+}
+
+.show-more-wrapper button:hover:not(:disabled) {
+    color: blueviolet;
 }
 
 .show-more-wrapper button:focus {

@@ -1,12 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 export interface City {
-    cityId: number,
-    cityName: string,
-    region: Region,
-    photos: Photo[],
-    tags: Tag[],
+    cityId?: number,
+    tagline?: string,
+    cityName?: string,
+    regionId?: number,
+    photoIds?: number[],
+    tagIds?: number[],
+    region?: Region,
+    tags?: Tag[],
+    photos?: Photo[],
+
 }
 
 export interface Region {
@@ -25,10 +31,43 @@ export interface Tag {
     name: string,
 }
 
+export interface MapEntry {
+    cityName: string,
+    cityId: number,
+    cssVector: string,
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class CityService {
+    private cityDataSource = new BehaviorSubject<Array<City>>(null);
+    private tagDataSource = new BehaviorSubject<Array<Tag>>(null);
+    private regionDataSource = new BehaviorSubject<Array<Region>>(null);
+    private photoDataSource = new BehaviorSubject<Array<Photo>>(null);
+    private tagCacheDataSource = new BehaviorSubject<Map<number, Tag>>(null);
+    private regionCacheDataSource = new BehaviorSubject<Map<number, Region>>(null);
+    private photoCacheDataSource = new BehaviorSubject<Map<number, Photo>>(null);
+    private mapEntryDataSource = new BehaviorSubject<MapEntry[]>(null);
+
+    cityDataSource$ = this.cityDataSource.asObservable();
+    tagDataSource$ = this.tagDataSource.asObservable();
+    regionDataSource$ = this.regionDataSource.asObservable();
+    photoDataSource$ = this.photoDataSource.asObservable();
+    tagCacheDataSource$ = this.tagCacheDataSource.asObservable();
+    regionCacheDataSource$ = this.regionCacheDataSource.asObservable();
+    photoCacheDataSource$ = this.photoCacheDataSource.asObservable();
+    mapEntryDataSource$ = this.mapEntryDataSource.asObservable();
+
+    private tagCache = new Map<number, Tag>();
+    private regionCache = new Map<number, Region>();
+    private photoCache = new Map<number, Photo>();
+    
+
+    private readonly baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
+    private readonly spreadsheetId = '1eO7bGeKYqZqnI9F7V4dClcmADSqRPq471ccVkNKqjXo';
+    private readonly apiKey = 'AIzaSyDpl_N8k-85ocm5OOIRA-3HC1j1ZmHH2C4';
+
     private data: string[] = [];
     private photoUrls: string[];
     private cityInfo: string;
@@ -89,7 +128,7 @@ export class CityService {
         {
             tagId: 2,
             color: 'rgb(8, 180, 60)',
-            name: 'Forest',
+            name: 'Beaches',
         },
         {
             tagId: 3,
@@ -98,7 +137,7 @@ export class CityService {
         },
         {
             tagId: 4,
-            color: 'rgb(166, 8, 180',
+            color: 'rgb(166, 8, 180)',
             name: 'Nightlife',
         },
         {
@@ -185,7 +224,9 @@ export class CityService {
             tags: [this.tags[3] , this.tags[2], this.tags[5]],
         },
     ]
-    constructor() {
+    constructor(
+        private httpClient: HttpClient
+    ) {
         this.photoUrls = [
             'assets/DN/DN10.jpg',
             'assets/DN/DN11.jpg',
@@ -198,9 +239,6 @@ export class CityService {
         ]
 
         this.cityInfo = "City info goes here";
-
-        
-
         this.regionIdToCities.set(1, [this.cities[0] , this.cities[0] , this.cities[0], this.cities[0], this.cities[0] , this.cities[0] , this.cities[0]]);
         this.regionIdToCities.set(2, [this.cities[1] , this.cities[1] , this.cities[1], this.cities[1], this.cities[1] , this.cities[1] , this.cities[1]]);
         this.regionIdToCities.set(3, [this.cities[2] , this.cities[2] ,this.cities[2], this.cities[2], this.cities[2] , this.cities[2] , this.cities[2]]);
@@ -208,6 +246,56 @@ export class CityService {
         this.regionNameToCities.set("Northern", [this.cities[0] , this.cities[0] , this.cities[0], this.cities[0], this.cities[0] , this.cities[0] , this.cities[0]]);
         this.regionNameToCities.set("Central", [this.cities[1] , this.cities[1] , this.cities[1], this.cities[1], this.cities[1] , this.cities[1] , this.cities[1]]);
         this.regionNameToCities.set("Southern", [this.cities[2] , this.cities[2] , this.cities[2], this.cities[2], this.cities[2] , this.cities[2] , this.cities[2]]);
+        
+        const getRegionsURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Region', 'A', 'B', 7)}key=${this.apiKey}`;
+        
+        console.log("getting regions");
+        this.httpClient.get(getRegionsURL).subscribe(
+            (result: string) =>{
+                this.parseRegion(result);
+                console.log("done getting regions");
+            }
+        )
+
+        const getCitiesURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('City', 'A', 'AC', 63)}key=${this.apiKey}`;
+        
+        console.log("getting cities");
+        this.httpClient.get(getCitiesURL).subscribe(
+            (result: string) =>{
+                this.parseCity(result);
+                console.log("done getting cities ",result);
+            }
+        )
+
+        const getTagsUrl = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Tag', 'A', 'C', 9)}key=${this.apiKey}`;
+        
+        console.log("getting tags");
+        this.httpClient.get(getTagsUrl).subscribe(
+            (result: string) =>{
+                this.parseTag(result);
+                console.log("done getting tags");
+            }
+        )
+
+        const getPhotoUrls= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Photo', 'A', 'B', 252)}key=${this.apiKey}`;
+        
+        console.log("getting photos");
+        this.httpClient.get(getPhotoUrls).subscribe(
+            (result: string) =>{
+                this.parsePhoto(result);
+                console.log("done getting photos");
+            }
+        )
+
+        const getMapEtriesUrls= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Map', 'A', 'D', 63)}key=${this.apiKey}`;
+        
+        console.log("getting map entries");
+        this.httpClient.get(getMapEtriesUrls).subscribe(
+            (result: string) =>{
+                this.parseMapEntry(result);
+                console.log("done getting map entries");
+            }
+        )
     }
 
     getPhotoUrlsOfCity(city: string): Observable<string[]> {
@@ -226,19 +314,6 @@ export class CityService {
         return of(this.cities);
     }
 
-    /*getAllRegion(): Observable<Region[]> {
-        return of(this.regions);
-    }
-
-  }
-    getCitiesByRegionId(id: number): Observable<City[]> {
-        return of(this.regionIdToCities.get(id));
-    }
-
-    getCitiesByRegionName(name: string): Observable<City[]> {
-        return of(this.regionNameToCities.get(name));
-    }*/
-
     getAllRegions(): Region[] {
         return this.regions;
     }
@@ -253,5 +328,115 @@ export class CityService {
 
     getAllTags(): Tag[] {
         return this.tags;
+    }
+
+    private constructRanges(sheetName: string, startColumn: string, endColumn: string, rowNum: number): string {
+        let range = '';
+        for (let i = 2 ; i <= rowNum+1 ; i++) {
+            range += `ranges=${sheetName}!${startColumn}${i}:${endColumn}${i}&`;
+        }
+        return range;
+    }
+    
+    private parseCity(returnValues: Object): City[] {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const cities = new Array<City>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawCity: string[] = values[i];
+            const city: City = {
+                cityId: Number(rawCity[1]),
+                cityName: rawCity[0],
+                tagline: rawCity[5],
+                regionId: Number(rawCity[3]),
+                photoIds: rawCity[11].split(',').map(Number),
+                tagIds: rawCity[16].split(',').map(Number),
+            }
+            cities.push(city);
+        }
+        this.cityDataSource.next(cities);
+        return cities;
+    }
+    
+    private parseRegion(returnValues: Object): Region[] {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const regions = new Array<Region>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawCity: string[] = values[i];
+            const region: Region = {
+                regionId: Number(rawCity[1]),
+                regionName: rawCity[0],
+            }
+            regions.push(region);
+            this.regionCache.set(region.regionId, region);
+        }
+        this.regionDataSource.next(regions);
+        this.regionCacheDataSource.next(this.regionCache);
+        return regions;
+    }
+    
+    private parseTag(returnValues: Object): Tag[] {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const tags = new Array<Tag>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawTag: string[] = values[i];
+            const tag: Tag = {
+                tagId: Number(rawTag[2]),
+                name: rawTag[0],
+                color: rawTag[1],
+            }
+            this.tagCache.set(tag.tagId, tag);
+            tags.push(tag);
+        }
+        this.tagDataSource.next(tags);
+        this.tagCacheDataSource.next(this.tagCache);
+        return tags;
+    }
+    
+    private parsePhoto(returnValues: Object): Photo[] {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const photos = new Array<Photo>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawPhoto: string[] = values[i];
+            const photo: Photo = {
+                photoUrl: this.transformToViewablUrl(rawPhoto[0]),
+                photoId: Number(rawPhoto[1]),
+            }
+            this.photoCache.set(photo.photoId, photo);
+            photos.push(photo);
+        }
+        this.photoDataSource.next(photos);
+        this.photoCacheDataSource.next(this.photoCache);
+        return photos;
+    }
+    
+    private parseMapEntry(returnValues: Object): MapEntry[] {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const mapEntries = new Array<MapEntry>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawMapEntry: string[] = values[i];
+            const mapEntry: MapEntry = {
+                cityName: rawMapEntry[0],
+                cityId: Number(rawMapEntry[1]),
+                cssVector: rawMapEntry[3],
+
+            }
+            mapEntries.push(mapEntry);
+        }
+        this.mapEntryDataSource.next(mapEntries);
+        return mapEntries;
+    }
+
+    private transformToViewablUrl(driveUrl: string): string {
+        const match = driveUrl.match(/d\/(.*?)\//);
+        if (match) {
+            return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+        } else {
+            return null;
+        }
     }
 }

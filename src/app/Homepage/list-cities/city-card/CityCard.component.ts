@@ -13,7 +13,7 @@ export class CityCardComponent implements OnInit{
     displayedTagsNum: number = 3;
     displayedTags: Tag[] = [];
     tagRows = new Array<Array<Tag>>();
-    maxCharactersPerRow: number = 35;
+    maxCharactersPerRow: number = 30;
 
     constructor(
         private cityService: CityService,
@@ -23,7 +23,7 @@ export class CityCardComponent implements OnInit{
     ngOnInit(): void {
         this.processTags();
         const nums: number[] = this.getRandomNumbers(0, this.city.photos.length - 1, 4);
-        console.log("clickedTag : ",this.selectedTagIds);
+        console.log(this.city);
         nums.forEach(index => {
             this.randomPhotos.push(this.city.photos[index]);
         });
@@ -35,7 +35,6 @@ export class CityCardComponent implements OnInit{
     }
 
     isTagClicked(tag: Tag): boolean {
-        console.log("what ",this.selectedTagIds);
         return this.selectedTagIds.has(tag.tagId);
     }
 
