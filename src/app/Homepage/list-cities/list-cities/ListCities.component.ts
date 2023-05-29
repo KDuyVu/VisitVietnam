@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Region, City, CityService, Tag} from "src/app/service/CityService.service";
+import { combineLatest } from "rxjs";
+import { Region, City, CityService, Tag, Photo} from "src/app/service/CityService.service";
 
 @Component({
     selector: "app-list-cities",
@@ -7,6 +8,10 @@ import { Region, City, CityService, Tag} from "src/app/service/CityService.servi
     styleUrls: ["./ListCities.component.css"]
 })
 export class ListCitiesComponent implements OnInit {
+    tagCache = new Map<number, Tag>();
+    photoCache = new Map<number, Photo>();
+    regionCache = new Map<number, Region>();
+
     regions: Region[] = [];
     regionIdToCities = new Map<number, City[]>;
     allCities: City[] = [];
@@ -15,7 +20,7 @@ export class ListCitiesComponent implements OnInit {
 
     minRowDisplayed: number = 1;
     showedRow: number = 1;
-    itemsPerRow: number = 3;
+    itemsPerRow: number = 4;
     selectedTagIds = new Set<number>();
 
     constructor(
@@ -32,6 +37,30 @@ export class ListCitiesComponent implements OnInit {
                 this.resetDisplayedCities();
             }
         )
+
+        combineLatest([cityService.cityDataSource$, cityService.tagDataSource$, cityService.regionDataSource$, cityService.photoDataSource$,
+            cityService.tagCacheDataSource$, cityService.regionCacheDataSource$, cityService.photoCacheDataSource$])
+            .subscribe(([cities, tags, regions, photos, tagCache, regionCache, photoCache]) => {
+                if (!cities || !tags || !regions || !photos || !tagCache || !regionCache || !photoCache) {
+                    return;
+                }
+
+                this.regionCache = regionCache;
+                this.tagCache = tagCache;
+                this.photoCache = photoCache;
+
+                this.regions = regions;
+                this.regions.forEach(region => {
+                    this.regionIdToCities.set(region.regionId, this.cityService.getCitiesByRegionId(region.regionId));
+                });
+                
+                this.allCities = cities;
+                console.log("starting");
+                this.addTagPhotoRegionToCities();
+                console.log("done");
+                this.filteredCities = this.allCities;
+                this.resetDisplayedCities();
+            });
     }
 
     ngOnInit(): void { }
@@ -77,8 +106,12 @@ export class ListCitiesComponent implements OnInit {
         }
     }
 
-    getFirstNthRowOfCities(n: number): Array<Array<City>> {
-        return this.displayedCities.slice(0, n);
+    onShowAllButtonClicked(): void {
+        this.showedRow = this.displayedCities.length;
+    }
+
+    onCollapseAllButtonClicked(): void {
+        this.showedRow = Math.min(this.displayedCities.length, this.minRowDisplayed);
     }
 
     isShowLessButtonDisabled() {
@@ -87,6 +120,18 @@ export class ListCitiesComponent implements OnInit {
 
     isShowMoreButtonDisabled() {
         return this.showedRow === this.displayedCities.length;
+    }
+
+    isCollapseAllButtonDisabled() {
+        return this.showedRow === 1;
+    }
+
+    isShowAllButtonDisabled() {
+        return this.showedRow === this.displayedCities.length;
+    }
+
+    getFirstNthRowOfCities(n: number): Array<Array<City>> {
+        return this.displayedCities.slice(0, n);
     }
 
     private getRandomInt(min: number, max: number): number {
@@ -101,6 +146,7 @@ export class ListCitiesComponent implements OnInit {
             return;
         }
         this.filteredCities = this.allCities.filter(city =>{
+            console.log("city L : ",city);
             return city.tags.filter(tag => this.selectedTagIds.has(tag.tagId)).length === this.selectedTagIds.size;
         });
         console.log("filted : ",this.filteredCities);
@@ -125,5 +171,14 @@ export class ListCitiesComponent implements OnInit {
     private resetDisplayedCities(): void {
         this.constructDisplayedCities();
         this.showedRow = Math.min(this.displayedCities.length, this.minRowDisplayed);
+    }
+
+    private addTagPhotoRegionToCities(): void {
+        this.allCities.forEach(city => {
+            city.tags = city.tagIds.map(tagId => this.tagCache.get(tagId)).filter(tag => !!tag);
+            city.photos = city.photoIds.map(photoId => this.photoCache.get(photoId));
+            city.region = this.regionCache.get(city.regionId);
+            console.log("ok ");
+        })
     }
 }

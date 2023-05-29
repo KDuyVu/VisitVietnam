@@ -17,7 +17,12 @@ export class FilterBarComponent {
     constructor(
         private cityService: CityService
     ) {
-        this.tags = this.cityService.getAllTags();
+        this.cityService.tagDataSource$.subscribe(
+            (tags: Tag[]) => {
+                this.tags = tags;
+                console.log("what ",this.tags);
+            }
+        )
     }
 
     onClickTag(tag: Tag) {
