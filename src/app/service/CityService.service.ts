@@ -18,6 +18,9 @@ export interface City {
 export interface Region {
     regionId: number,
     regionName: string,
+    bigRegionName?: string,
+    color?: string,
+    bigRegionId?: number,
 }
 
 export interface Photo {
@@ -42,6 +45,7 @@ export interface MapEntry {
 })
 export class CityService {
     private cityDataSource = new BehaviorSubject<Array<City>>(null);
+    private cityCacheDataSource = new BehaviorSubject<Map<number, City>>(null);
     private tagDataSource = new BehaviorSubject<Array<Tag>>(null);
     private regionDataSource = new BehaviorSubject<Array<Region>>(null);
     private photoDataSource = new BehaviorSubject<Array<Photo>>(null);
@@ -51,6 +55,7 @@ export class CityService {
     private mapEntryDataSource = new BehaviorSubject<MapEntry[]>(null);
 
     cityDataSource$ = this.cityDataSource.asObservable();
+    cityCacheDataSource$ = this.cityCacheDataSource.asObservable();
     tagDataSource$ = this.tagDataSource.asObservable();
     regionDataSource$ = this.regionDataSource.asObservable();
     photoDataSource$ = this.photoDataSource.asObservable();
@@ -62,6 +67,7 @@ export class CityService {
     private tagCache = new Map<number, Tag>();
     private regionCache = new Map<number, Region>();
     private photoCache = new Map<number, Photo>();
+    private cityCache = new Map<number, City>();
     
 
     private readonly baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
@@ -247,7 +253,7 @@ export class CityService {
         this.regionNameToCities.set("Central", [this.cities[1] , this.cities[1] , this.cities[1], this.cities[1], this.cities[1] , this.cities[1] , this.cities[1]]);
         this.regionNameToCities.set("Southern", [this.cities[2] , this.cities[2] , this.cities[2], this.cities[2], this.cities[2] , this.cities[2] , this.cities[2]]);
         
-        const getRegionsURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Region', 'A', 'B', 7)}key=${this.apiKey}`;
+        const getRegionsURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Region', 'A', 'E', 8)}key=${this.apiKey}`;
         
         console.log("getting regions");
         this.httpClient.get(getRegionsURL).subscribe(
@@ -348,13 +354,16 @@ export class CityService {
                 cityId: Number(rawCity[1]),
                 cityName: rawCity[0],
                 tagline: rawCity[5],
-                regionId: Number(rawCity[3]),
+                regionId: Number(rawCity[4]),
                 photoIds: rawCity[11].split(',').map(Number),
                 tagIds: rawCity[16].split(',').map(Number),
             }
             cities.push(city);
+            this.cityCache.set(city.cityId, city);
         }
+        cities.sort((city1, city2) => city1.cityName.localeCompare(city2.cityName));
         this.cityDataSource.next(cities);
+        this.cityCacheDataSource.next(this.cityCache);
         return cities;
     }
     
@@ -367,6 +376,9 @@ export class CityService {
             const region: Region = {
                 regionId: Number(rawCity[1]),
                 regionName: rawCity[0],
+                bigRegionName: rawCity[2],
+                color: rawCity[3],
+                bigRegionId: Number(rawCity[4]),
             }
             regions.push(region);
             this.regionCache.set(region.regionId, region);

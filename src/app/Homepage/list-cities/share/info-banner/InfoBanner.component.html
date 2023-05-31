@@ -1,0 +1,5 @@
+<div class="app-wrapper" *ngIf="!isClosed">
+    <span nz-icon [nzType]="icon" nzTheme="fill"></span>
+    <div> {{text}} </div>
+    <span class="close-button" nz-icon nzType="close-circle" nzTheme="outline" (click)="onCloseClicked()"></span>
+</div>

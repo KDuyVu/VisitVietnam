@@ -4,6 +4,11 @@
     width: 100%;
 }
 
+app-info-banner {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
 .app-wrapper {
     transform-origin: top left;
 }

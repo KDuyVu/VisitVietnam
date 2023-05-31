@@ -30,7 +30,6 @@ export class PhotoContainerComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    console.log("photo urls : ",this.photoUrls);
   }
 
   ngOnDestroy(): void {
@@ -50,6 +49,5 @@ export class PhotoContainerComponent implements OnInit, OnDestroy{
       this.photoUrls.push(oneRow);
       oneRow = [];
     }
-    console.log(this.photoUrls);
   }
 }
