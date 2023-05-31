@@ -20,7 +20,6 @@ export class FilterBarComponent {
         this.cityService.tagDataSource$.subscribe(
             (tags: Tag[]) => {
                 this.tags = tags;
-                console.log("what ",this.tags);
             }
         )
     }

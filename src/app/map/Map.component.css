@@ -1,6 +1,20 @@
+app-info-banner {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
 div.page-container-div {
     height: 90%;
     display: flex;
+}
+
+.search-bar-wrapper {
+    width: 35%;
+    padding: 5em;
+}
+
+app-search-bar {
+    width: 100%;
 }
 
 div.map-div {
@@ -22,10 +36,21 @@ path:hover {
 
 path.active {
     opacity: 0.5;
-    fill: red;
+    fill: #d300ff;
 }
 
 .map-div {
     display: inline-flex;
 }
 
+.city-card-wrapper {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    margin: 2em;
+}
+
+app-city-card {
+    width: 100%;
+    height: auto;
+}

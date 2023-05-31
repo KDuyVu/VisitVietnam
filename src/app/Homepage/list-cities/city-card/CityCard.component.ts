@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { City, CityService, Photo, Tag } from "src/app/service/CityService.service";
 
 @Component({
@@ -6,24 +6,30 @@ import { City, CityService, Photo, Tag } from "src/app/service/CityService.servi
     templateUrl: "./CityCard.component.html",
     styleUrls: ["./CityCard.component.css"]
 })
-export class CityCardComponent implements OnInit{
+export class CityCardComponent implements OnChanges {
     @Input() city: City = null;
     @Input() selectedTagIds = new Set<number>();
+    @Input() allTagsSelected: boolean = false;
     randomPhotos: Photo[] = [];
     displayedTagsNum: number = 3;
     displayedTags: Tag[] = [];
     tagRows = new Array<Array<Tag>>();
     maxCharactersPerRow: number = 30;
+    loadedImages = new Set<number>();
 
     constructor(
         private cityService: CityService,
         private cdr: ChangeDetectorRef,
     ) {}
 
-    ngOnInit(): void {
+    ngOnChanges(changes: SimpleChanges): void {
+        this.tagRows = new Array<Array<Tag>>();
+        this.randomPhotos = [];
+        this.cdr.detectChanges();
+        this.displayedTags = [];
         this.processTags();
+        this.loadedImages = new Set<number>();
         const nums: number[] = this.getRandomNumbers(0, this.city.photos.length - 1, 4);
-        console.log(this.city);
         nums.forEach(index => {
             this.randomPhotos.push(this.city.photos[index]);
         });
@@ -38,9 +44,18 @@ export class CityCardComponent implements OnInit{
         return this.selectedTagIds.has(tag.tagId);
     }
 
+    onLoaded(id: number): void {
+        this.loadedImages.add(id);
+    }
+
+    isLoaded(id: number): boolean {
+        return this.loadedImages.has(id);
+    }
+
     private processTags(): void {
         let aRow: Tag[] = [];
         let sum: number = 0;
+        this.city.tags.sort((tag1, tag2) => tag1.name.length - tag2.name.length)
         this.city.tags.forEach(tag => {
             if (sum + tag.name.length > this.maxCharactersPerRow) {
                 this.tagRows.push(aRow);
@@ -53,16 +68,6 @@ export class CityCardComponent implements OnInit{
         if (aRow.length > 0) {
             this.tagRows.push(aRow);
         }
-    }
-
-    private getDisplayedTags(): Tag[] {
-        const nums: number[] = this.getRandomNumbers(0, this.city.tags.length - 1, this.displayedTagsNum);
-        const tags: Tag[] = []
-        nums.forEach(index => {
-            console.log(index);
-            tags.push(this.city.tags[index]);
-        });
-        return tags;
     }
 
     private getRandomNumbers(a: number, b: number, numSize: number = 4): number[] {

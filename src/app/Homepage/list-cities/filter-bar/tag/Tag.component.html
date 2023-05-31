@@ -1,5 +1,5 @@
 <div
     [style.color]="tag.color"
-    [style.background-color]="selected ? getBackgroundColor() : ''"> 
+    [style.background-color]="selected || shadowAll ? getBackgroundColor() : ''"> 
     {{tag.name}}
 </div>

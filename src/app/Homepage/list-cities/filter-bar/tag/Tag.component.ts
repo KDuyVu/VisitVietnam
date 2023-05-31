@@ -9,6 +9,7 @@ import { Tag } from "src/app/service/CityService.service";
 export class TagComponent {
     @Input() tag: Tag;
     @Input() selected: boolean = false;
+    @Input() shadowAll: boolean = false;
     
 
     getBackgroundColor(): string {

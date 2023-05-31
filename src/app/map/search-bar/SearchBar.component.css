@@ -1,8 +1,13 @@
-input {
-    width: 15em;
+.ant-input-affix-wrapper {
+    border: 0.5px solid blueviolet;
 }
 
-nz-input-group {
-    margin-left: 2em;
-    width: 15em;
+nz-select {
+    width: 100%;
+    margin-top: 1em;
+    border: 0.5px solid blueviolet;
+}
+
+nz-selec.ant-select-open, nz-selec.ant-select-focused {
+    border: 1px solid blueviolet;
 }

@@ -55,9 +55,7 @@ export class ListCitiesComponent implements OnInit {
                 });
                 
                 this.allCities = cities;
-                console.log("starting");
                 this.addTagPhotoRegionToCities();
-                console.log("done");
                 this.filteredCities = this.allCities;
                 this.resetDisplayedCities();
             });
@@ -139,17 +137,13 @@ export class ListCitiesComponent implements OnInit {
     }
 
     private filterCityOnTagsChanged(): void {
-        console.log("? ", this.selectedTagIds);
         if (this.selectedTagIds.size === 0) {
             this.filteredCities = this.allCities;
-            console.log("fitler : ",this.filteredCities);
             return;
         }
         this.filteredCities = this.allCities.filter(city =>{
-            console.log("city L : ",city);
             return city.tags.filter(tag => this.selectedTagIds.has(tag.tagId)).length === this.selectedTagIds.size;
         });
-        console.log("filted : ",this.filteredCities);
     }
 
     private constructDisplayedCities(): void {
@@ -178,7 +172,6 @@ export class ListCitiesComponent implements OnInit {
             city.tags = city.tagIds.map(tagId => this.tagCache.get(tagId)).filter(tag => !!tag);
             city.photos = city.photoIds.map(photoId => this.photoCache.get(photoId));
             city.region = this.regionCache.get(city.regionId);
-            console.log("ok ");
         })
     }
 }

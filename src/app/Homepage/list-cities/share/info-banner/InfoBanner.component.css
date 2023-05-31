@@ -1,0 +1,30 @@
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: rgb(237, 237, 237);
+    width: fit-content;
+}
+
+.app-wrapper div {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.app-wrapper span:not(.close-button) {
+    color: green;
+    font-size: 1.5em;
+}
+
+.close-button:hover {
+    cursor: pointer;
+}

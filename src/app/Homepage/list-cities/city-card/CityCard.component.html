@@ -1,12 +1,24 @@
 <div class="wrapper" (click)="redirectClick()">
     <div class="photo-section-div">
         <div class="photo-row-div">
-            <img [src]="randomPhotos[0].photoUrl" alt="My image">
-            <img [src]="randomPhotos[1].photoUrl" alt="My image">
+            <div class="photo-wrapper"> 
+                <img (load)="onLoaded(0)" [src]="randomPhotos.length === 4 ? randomPhotos[0].photoUrl : ''" alt="My image">
+                <nz-spin *ngIf="!isLoaded(0)"></nz-spin>
+            </div>
+            <div class="photo-wrapper"> 
+                <img (load)="onLoaded(1)" [src]="randomPhotos.length === 4 ? randomPhotos[1].photoUrl : ''" alt="My image">
+                <nz-spin *ngIf="!isLoaded(1)"></nz-spin>
+            </div>
         </div>
         <div class="photo-row-div">
-            <img [src]="randomPhotos[2].photoUrl" alt="My image">
-            <img [src]="randomPhotos[3].photoUrl" alt="My image">
+            <div class="photo-wrapper"> 
+                <img (load)="onLoaded(2)" [src]="randomPhotos.length === 4 ? randomPhotos[2].photoUrl : ''" alt="My image">
+                <nz-spin *ngIf="!isLoaded(2)"></nz-spin>
+            </div>
+            <div class="photo-wrapper"> 
+                <img (load)="onLoaded(3)" [src]="randomPhotos.length === 4 ? randomPhotos[3].photoUrl : ''" alt="My image">
+                <nz-spin *ngIf="!isLoaded(3)"></nz-spin>
+            </div>
         </div>
     </div>
     <div class="city-title-div">
@@ -22,7 +34,7 @@
     </div>
     <div class="footnote-wrapper">
         <div class="footnote-div" *ngFor="let row of tagRows">
-            <app-tag *ngFor="let tag of row" [tag]="tag" [selected]="isTagClicked(tag)"> </app-tag>
+            <app-tag *ngFor="let tag of row" [tag]="tag" [selected]="isTagClicked(tag)" [shadowAll]="allTagsSelected"> </app-tag>
         </div>
     </div>
 </div>

@@ -1,4 +1,7 @@
+<app-info-banner [text]="'Select a tag or multiple tags to narrow down your search'" [icon]="'check-circle'"> </app-info-banner>
+
 <app-filter-bar (onSelectedTagsChanged)="onSelectedTagsChanged($event)"> </app-filter-bar>
+
 <div class="photo-container-wrapper">
     <div class="photo-container-div">
         <div *ngFor="let row of getFirstNthRowOfCities(showedRow)" class="photo-row-div">
