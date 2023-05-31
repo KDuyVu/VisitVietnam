@@ -1,0 +1,37 @@
+<app-filter-bar (onSelectedTagsChanged)="onSelectedTagsChanged($event)"> </app-filter-bar>
+<div class="photo-container-wrapper">
+    <div class="photo-container-div">
+        <div *ngFor="let row of getFirstNthRowOfCities(showedRow)" class="photo-row-div">
+            <app-city-card *ngFor="let city of row" [city]="city"
+                class="photo-item-div" [selectedTagIds]="selectedTagIds">
+            </app-city-card>
+        </div>
+    </div>
+</div>
+
+<div class="show-more-wrapper">
+    <button nz-button nzType="default" (click)="onShowMoreButtonClicked()" [disabled]="isShowMoreButtonDisabled()">
+        <div class="button-div"> 
+            <span><mat-icon inline> expand_more </mat-icon>  </span>
+            <div> Show more </div>
+        </div>
+    </button>
+    <button nz-button nzType="default" (click)="onShowAllButtonClicked()" [disabled]="isShowAllButtonDisabled()">
+        <div class="button-div"> 
+            <span><mat-icon inline> expand_more </mat-icon>  </span>
+            <div> Show all</div>
+        </div>
+    </button>
+    <button nz-button nzType="default" (click)="onShowLessButtonClicked()" [disabled]="isShowLessButtonDisabled()">
+        <div class="button-div"> 
+            <span><mat-icon inline> expand_less </mat-icon>  </span>
+            <div> Show less</div>
+        </div>
+    </button>
+    <button nz-button nzType="default" (click)="onCollapseAllButtonClicked()" [disabled]="isCollapseAllButtonDisabled()">
+        <div class="button-div"> 
+            <span><mat-icon inline> expand_less </mat-icon>  </span>
+            <div> Collapse all</div>
+        </div>
+    </button>
+</div>

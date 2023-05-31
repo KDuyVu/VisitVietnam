@@ -1,0 +1,28 @@
+<div class="wrapper" (click)="redirectClick()">
+    <div class="photo-section-div">
+        <div class="photo-row-div">
+            <img [src]="randomPhotos[0].photoUrl" alt="My image">
+            <img [src]="randomPhotos[1].photoUrl" alt="My image">
+        </div>
+        <div class="photo-row-div">
+            <img [src]="randomPhotos[2].photoUrl" alt="My image">
+            <img [src]="randomPhotos[3].photoUrl" alt="My image">
+        </div>
+    </div>
+    <div class="city-title-div">
+        <div> {{city.cityName}}</div>
+        <mat-icon>open_in_new</mat-icon>
+    </div>
+
+    <div class="info-title-div"> {{city.tagline}} </div>
+    <div class="bullet-points-div">
+        <li> point1 </li>
+        <li> point2 </li>
+        <li> point3 </li>
+    </div>
+    <div class="footnote-wrapper">
+        <div class="footnote-div" *ngFor="let row of tagRows">
+            <app-tag *ngFor="let tag of row" [tag]="tag" [selected]="isTagClicked(tag)"> </app-tag>
+        </div>
+    </div>
+</div>
