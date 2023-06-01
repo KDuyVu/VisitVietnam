@@ -28,6 +28,12 @@ import { TravelTipsPageComponent } from './Homepage/travel-tips/TravelTipsPage.c
 import { TravelTipsCardComponent } from './Homepage/travel-tips/travel-tips-card/TravelTipsCard.component';
 import { AppComponent } from './app.component';
 import { PaginationComponent } from './shared-components/pagination/Pagination.component';
+import { FooterComponent } from './Homepage/footer/footer.component';
+import { HeaderComponent } from './Homepage/header/header.component';
+import { CelebrationsComponent } from './Homepage/celebrations/celebrations.components';
+
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 
 @NgModule({
@@ -44,6 +50,10 @@ import { PaginationComponent } from './shared-components/pagination/Pagination.c
     PaginationComponent,
     TravelTipsCardComponent,
     TravelTipsPageComponent,
+    SearchBarComponent,
+    HeaderComponent,
+    CelebrationsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +75,9 @@ import { PaginationComponent } from './shared-components/pagination/Pagination.c
     NzSelectModule,
     NzButtonModule,
     NzIconModule.forRoot([ArrowLeftOutline, ArrowRightOutline]),
+    
+    NzCardModule,
+    NzGridModule
   ],
   bootstrap: [AppComponent]
 })
