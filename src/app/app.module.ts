@@ -31,6 +31,7 @@ import { PaginationComponent } from './shared-components/pagination/Pagination.c
 import { FooterComponent } from './shared-components/footer/footer.component';
 import { HeaderComponent } from './Homepage/header/header.component';
 import { CelebrationsComponent } from './Homepage/celebrations/celebrations.components';
+import { SharedHeaderComponent } from './shared-components/header/header.component';
 
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -50,6 +51,7 @@ import { BlogComponent } from './BlogPage/Blog.component';
 import { BlogPostsComponent } from './BlogPage/blogs/Blogs.component';
 import { BlogWelcomeComponent } from './BlogPage/welcome/Welcome.component';
 import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.compone
     TagComponent,
     InfoBannerComponent,
     PaginationComponent,
+    SharedHeaderComponent,
     TravelTipsCardComponent,
     TravelTipsPageComponent,
     SearchBarComponent,
@@ -80,6 +83,12 @@ import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.compone
     BlogPostsComponent,
     BlogWelcomeComponent,
     IndividualBlogComponent,
+    SearchBarComponent,
+    HeaderComponent,
+    CelebrationsComponent,
+    FooterComponent,
+    SliderComponent,
+    SharedHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +116,7 @@ import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.compone
     NzGridModule,
     AppRoutingModule,
     MatDialogModule,
+    NzIconModule
   ],
   exports: [
     TravelTipsCardComponent,
