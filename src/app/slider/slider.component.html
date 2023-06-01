@@ -1,0 +1,25 @@
+<link href='https://fonts.googleapis.com/css?family=Parisienne' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Besley' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css2?family=Poppins' rel="stylesheet">
+<div class="slider">
+  <h1>BEACHES</h1>
+  <div class="slider-container">
+    <div class="left-arrow" (click)="changeImage(-1)">
+      <span nz-icon nzType="left" nzTheme="outline"></span>
+    </div>
+    <div class="slides">
+      <div class="slide" *ngFor="let image of images; let i = index" [ngClass]="{ 'active': i === currentImageIndex }">
+        <img [src]="image.src" [alt]="image.alt">
+      </div>
+    </div>
+    <div class="right-arrow" (click)="changeImage(1)">
+      <span nz-icon nzType="right" nzTheme="outline"></span>
+    </div>
+  </div>
+  <div class="slides-show">
+    <div class="slides-show-div" *ngFor="let div of divCount; let i = index">
+      <img [src]="images[i % images.length].src" [alt]="images[i % images.length].alt" />
+    </div>
+  </div>
+</div>
