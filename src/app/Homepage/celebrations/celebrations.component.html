@@ -1,0 +1,19 @@
+<div class="nationalCelebrations">
+  <h1>National Celebrations</h1>
+  <div class="NC-contents">
+    <div class="NC-contents-row" nz-row [nzGutter]="8">
+      <div class="NC-contents-col" nz-col [nzSpan]="7" *ngFor="let picture of pictures">
+        <a href="#">
+          <div class="NC-contents-pic">
+            <img [src]="picture.link" alt="City Picture">
+          </div>
+          <div class="NC-contents-description">
+            <h3>{{ picture.name }}</h3>
+            <p>{{ picture.scale }}</p>
+            <p>{{ picture.date }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+ * {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+ }
+ .nationalCelebrations {
+  width: 100%;
+  margin-top: 10vh;
+  text-align: center;
+ }
+
+ .nationalCelebrations h1 {
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 110px;
+ }
+ .NC-contents {
+  padding: 40px;
+  margin-top: 20px;
+ }
+ 
+ .NC-contents-col {
+  margin: 20px 20px;
+  text-align: center;
+ }
+ .NC-contents-pic {
+  display: inline-block;
+  width: 50%;
+ }
+ .NC-contents-pic img{
+  width: 100%;
+ }
+ .NC-contents-description {
+  display: inline-block;
+  width: 45%;
+  height: 120px;
+  margin-left: 10px;
+  text-align: left;
+ }
+ .NC-contents-description h3, p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 30px;
+  color: #306927;
+ }
+ .NC-contents-description h3 {
+  font-weight: 700;
+  font-size: 20px;
+
+ }

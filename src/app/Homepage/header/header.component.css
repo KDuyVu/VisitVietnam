@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #091133;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+}
+
+.header {
+  min-height: 100vh;
+  width: 100%;
+  background: url('https://i.ibb.co/Lvqt6Vn/image.png');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  background-position: center center;
+}
+
+nav {
+  display: flex;
+  padding: 1.5% 6% 0% 6%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav img {
+  width: 200px;
+}
+
+.nav-links {
+  flex: 1;
+  text-align: right;
+  margin-right: 28%;
+}
+
+.nav-links ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 8px 12px;
+  position: relative;
+}
+
+.nav-links ul li a {
+  color: #091133;
+  text-decoration: none;
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 60px;
+  letter-spacing: 1px;
+  margin-left: 30px;
+}
+
+.text-box {
+  position: static;
+  width: 40%;
+  margin: 60px 80px;
+}
+
+.text-box h1 {
+  font-family: 'Besley';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 65px;
+  line-height: 70px;
+}
+
+.text-box h2 {
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 160px;
+  line-height: 85px;
+  /* or 53% */
+
+  letter-spacing: 1px;
+  padding-top: 50px;
+}
+
+.text-box p {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 17px;
+  line-height: 30px;
+  padding-top: 10px;
+}
+
+.text-box p:first-of-type {
+  padding-top: 50px;
+}
+
+.header-pic {
+  width: 30%;
+  height: 100px;
+  float: left;
+}
+
+.div-wrapper {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+.div-wrapper img {
+  width: 100%;
+}
