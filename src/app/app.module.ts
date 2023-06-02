@@ -1,47 +1,39 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppComponent } from './app.component';
-import { InfoContainerComponent } from './map/info-container/InfoContainer.component';
-import { MapComponent } from './map/Map.component';
-import { PhotoContainerComponent } from './map/photo-container/PhotoContainer.component';
-import { SearchBarComponent } from './map/search-bar/SearchBar.component';
-import { CityService } from './service/CityService.service';
-import { DataService } from './service/DataService.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ArrowLeftOutline, ArrowRightOutline } from '@ant-design/icons-angular/icons';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
-import { ListCitiesComponent } from './Homepage/list-cities/list-cities/ListCities.component';
-import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { CityCardComponent } from './Homepage/list-cities/city-card/CityCard.component';
-import { HomepageComponent } from './Homepage/list-cities/Homepage.component';
-import { FilterBarComponent } from './Homepage/list-cities/filter-bar/FilterBar.component';
-import { TagComponent } from './Homepage/list-cities/filter-bar/tag/Tag.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { InfoBannerComponent } from './Homepage/list-cities/share/info-banner/InfoBanner.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { HomepageComponent } from './Homepage/Homepage.component';
+import { CityCardComponent } from './Homepage/city-card/CityCard.component';
+import { FilterBarComponent } from './Homepage/filter-bar/FilterBar.component';
+import { TagComponent } from './Homepage/filter-bar/tag/Tag.component';
+import { ListCitiesComponent } from './Homepage/list-cities/ListCities.component';
+import { MapComponent } from './Homepage/map/Map.component';
+import { SearchBarComponent } from './Homepage/map/search-bar/SearchBar.component';
+import { InfoBannerComponent } from './Homepage/share/info-banner/InfoBanner.component';
+import { TravelTipsPageComponent } from './Homepage/travel-tips/TravelTipsPage.component';
+import { TravelTipsCardComponent } from './Homepage/travel-tips/travel-tips-card/TravelTipsCard.component';
+import { AppComponent } from './app.component';
+import { PaginationComponent } from './shared-components/pagination/Pagination.component';
 
-registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    PhotoContainerComponent,
-    InfoContainerComponent,
     SearchBarComponent,
     HomepageComponent,
     CityCardComponent,
@@ -49,6 +41,9 @@ registerLocaleData(en);
     FilterBarComponent,
     TagComponent,
     InfoBannerComponent,
+    PaginationComponent,
+    TravelTipsCardComponent,
+    TravelTipsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,8 +63,9 @@ registerLocaleData(en);
     NzButtonModule,
     NzSpinModule,
     NzSelectModule,
+    NzButtonModule,
+    NzIconModule.forRoot([ArrowLeftOutline, ArrowRightOutline]),
   ],
-  providers: [DataService, CityService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

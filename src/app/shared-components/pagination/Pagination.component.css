@@ -1,0 +1,72 @@
+:host {
+    margin-left: 2em;
+    margin-right: 2em;
+    padding-top: 1em;
+    margin-top: 2em;
+    display: flex;
+    border-top: 1px solid pink;
+}
+
+.page-button {
+    display: flex;
+    align-items: center;
+}
+
+.page-button .page-number-div:hover {
+    cursor: pointer;
+}
+
+.page-button .page-number-div, .three-dot-class{
+    border-radius: 0.5em;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-button .page-number-div.active-page {
+    background-color: pink;
+}
+
+.page-button .page-number-div p {
+    margin: 0px;
+}
+
+.page-button .page-number-div:hover:not(.active-page) {
+    color: pink;
+}
+
+.app-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button[nz-button] {
+    border-color: white;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+button[nz-button].previous-button {
+    border-color: white;
+    padding-right: 0.8em;
+    padding-left: 0.5em;
+}
+
+button[nz-button].next-button {
+    border-color: white;
+    padding-right: 0.5em;
+    padding-left: 0.8em;
+}
+
+button[nz-button]:hover, button[nz-button]:focus {
+    border-color: rgb(201, 73, 94);
+    color: rgb(201, 73, 94);
+}
+
+button[nz-button]:focus {
+    color: black;
+}

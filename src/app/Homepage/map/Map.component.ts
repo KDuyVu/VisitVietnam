@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from "@angular/core";
-import { DataService} from "../service/DataService.service";
+import { ChangeDetectorRef, Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { City, CityService, MapEntry, Photo, Region, Tag  } from "../service/CityService.service";
-import { combineLatest, map } from "rxjs";
+import { combineLatest } from "rxjs";
+import { City, CityService, MapEntry, Photo, Region, Tag } from "../../service/CityService.service";
 
 @Component({
     selector: 'app-map',
@@ -30,10 +29,8 @@ export class MapComponent {
 
     constructor(
         private cityService: CityService,
-        private dataSvc: DataService,
-        private cdr: ChangeDetectorRef) {
-        //this.mapEntries = this.dataSvc.getData();
-
+        private cdr: ChangeDetectorRef
+    ) {
         combineLatest([cityService.cityCacheDataSource$, cityService.tagCacheDataSource$, cityService.regionCacheDataSource$, cityService.photoCacheDataSource$, cityService.mapEntryDataSource$])
             .subscribe(([cityCache, tagCache, regionCache, photoCache, mapEntries]) => {
                 if (!cityCache || !tagCache || !regionCache || !photoCache) {

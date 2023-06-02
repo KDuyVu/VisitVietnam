@@ -1,0 +1,81 @@
+import { Component, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
+import { EventEmitter } from "@angular/core";
+@Component({
+    selector: "app-pagination",
+    templateUrl: "./Pagination.component.html",
+    styleUrls: ["./Pagination.component.css"]
+})
+export class PaginationComponent implements OnChanges{
+    @Input() itemsSize: number = 1;
+    @Input() itemPerPage: number = 1;
+    @Output() pageChanged = new EventEmitter<number>();
+
+
+    maxPageNumber: number = 1;
+    currentPageNumbers: number[] = [];
+    numberOfPagesToChoose: number = 4;
+    selectedPage: number = 1;
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.maxPageNumber = Math.ceil(this.itemsSize / this.itemPerPage);
+        for (let i = 1 ; i <= Math.min(this.numberOfPagesToChoose - 1, this.maxPageNumber - 1) ; i++) {
+            this.currentPageNumbers.push(i);
+        }
+    }
+
+    onClickPrevious(): void {
+        if (this.selectedPage === 1) {
+            return;
+        }
+        this.selectedPage--;
+        this.pageChanged.emit(this.selectedPage);
+        this.reconstructCurrentPageNumbes();
+        console.log("what ",this.currentPageNumbers);
+
+    }
+
+    onClickNext(): void {
+        if (this.selectedPage === this.maxPageNumber) {
+            return;
+        }
+        this.selectedPage++;
+        this.pageChanged.emit(this.selectedPage);
+        this.reconstructCurrentPageNumbes();
+        console.log("what ",this.currentPageNumbers);
+    }
+
+    onPageClick(pageNum: number): void {
+        this.selectedPage = pageNum;
+        this.pageChanged.emit(this.selectedPage);
+        this.reconstructCurrentPageNumbes();
+        console.log("click ",pageNum);
+    }
+
+    isDotsDisplayed(): boolean {
+        return (this.currentPageNumbers.slice(-1)[0] + 2) < this.maxPageNumber;
+    }
+
+    private reconstructCurrentPageNumbes(): void {
+        if (this.currentPageNumbers.length + 1 === this.maxPageNumber) {
+            return;
+        }
+        if (this.selectedPage + this.numberOfPagesToChoose <= this.maxPageNumber) {
+            for (let i = 1 ; i < this.numberOfPagesToChoose ; i++) {
+                this.currentPageNumbers[i-1] = this.selectedPage + i - 1;
+            }
+        } else {
+            this.currentPageNumbers = []
+            for (let i = this.maxPageNumber - this.numberOfPagesToChoose ; i < this.maxPageNumber - 1 ; i++) {
+                this.currentPageNumbers.push(i);
+            }
+        }
+
+        if (this.selectedPage === this.currentPageNumbers[0] && this.selectedPage !== 1) {
+            this.currentPageNumbers = this.currentPageNumbers.map(num => num - 1);
+        }
+
+        if (this.selectedPage === this.currentPageNumbers[this.currentPageNumbers.length - 1] && this.selectedPage !== this.maxPageNumber - 2) {
+            this.currentPageNumbers = this.currentPageNumbers.map(num => num - 1);
+        }
+    }
+}

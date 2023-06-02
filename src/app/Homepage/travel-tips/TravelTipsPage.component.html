@@ -1,0 +1,19 @@
+<div class="page-header">
+    <h1> Travel tips </h1>
+    <button nz-button>
+        View more
+        <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
+    </button>
+</div>
+<div class="travel-tip-cards">
+    <app-travel-tip-card
+        *ngFor="let travelTip of getDisplayedItems()"
+        [header]="travelTip.header"
+        [text]="travelTip.text"
+    > </app-travel-tip-card>
+</div>
+<app-pagination
+    [itemPerPage]="travelTips ? 3 : 1"
+    [itemsSize]="!travelTips ? 1 : travelTips.length"
+    (pageChanged)="onPageChanged($event)"
+> </app-pagination>
