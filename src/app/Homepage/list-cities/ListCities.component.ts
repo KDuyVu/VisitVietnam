@@ -26,18 +26,6 @@ export class ListCitiesComponent implements OnInit {
     constructor(
         private cityService: CityService
     ) {
-        this.regions = cityService.getAllRegions();
-        this.regions.forEach(region => {
-            this.regionIdToCities.set(region.regionId, this.cityService.getCitiesByRegionId(region.regionId));
-        })
-        cityService.getAllCities().subscribe(
-            (result: City[]) =>{
-                this.allCities = result;
-                this.filteredCities = result;
-                this.resetDisplayedCities();
-            }
-        )
-
         combineLatest([cityService.cityDataSource$, cityService.tagDataSource$, cityService.regionDataSource$, cityService.photoDataSource$,
             cityService.tagCacheDataSource$, cityService.regionCacheDataSource$, cityService.photoCacheDataSource$])
             .subscribe(([cities, tags, regions, photos, tagCache, regionCache, photoCache]) => {
@@ -49,12 +37,14 @@ export class ListCitiesComponent implements OnInit {
                 this.tagCache = tagCache;
                 this.photoCache = photoCache;
 
+                this.allCities = cities;
+
                 this.regions = regions;
                 this.regions.forEach(region => {
-                    this.regionIdToCities.set(region.regionId, this.cityService.getCitiesByRegionId(region.regionId));
+                    // this.regionIdToCities.set(region.regionId, this.cityService.getCitiesByRegionId(region.regionId));
+                    this.regionIdToCities.set(region.regionId, this.allCities.filter(city => city.regionId === region.regionId));
                 });
                 
-                this.allCities = cities;
                 this.addTagPhotoRegionToCities();
                 this.filteredCities = this.allCities;
                 this.resetDisplayedCities();

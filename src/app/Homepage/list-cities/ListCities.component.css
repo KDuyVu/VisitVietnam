@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+}
+
+:host {
+    display: block;
+    height: auto;
+    width: 100%;
+    margin-bottom: 7em;
+}
+
+h1 {
+    font-family: 'Parisienne';
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    font-style: normal;
+    font-size: 110px;
+    margin: unset;
+}
+
+app-info-banner {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.app-wrapper {
+    transform-origin: top left;
+}
+
+.scale-div {
+    display: inline-block;
+}
+
+.photo-container-wrapper{
+    width: 100%;
+    padding-left: 8em;
+    padding-right: 8em;
+    margin-top: 2em;
+}
+
+.photo-row-div {
+    display: flex;
+}
+
+.photo-container-div {
+    box-sizing: border-box;
+}
+
+app-city-card:not(:last-child) {
+    margin-right: 3em;
+    box-sizing: border-box;
+}
+
+.photo-item-div {
+    width: calc((100% - 9em) / 4);
+}
+
+.pagination-div {
+    width: fit-content;
+    float: right;
+    padding: 1em;
+    padding-right: 3em;
+    color:aqua;
+}
+
+.show-more-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.show-more-wrapper button {
+    margin: 1em;
+    color: blueviolet;
+    border-color: blueviolet;
+}
+
+.show-more-wrapper button:hover:not(:disabled), .show-more-wrapper button:focus:not(:disabled){
+    color: pink;
+    border-color: pink;
+}
+
+.button-div {
+    display: flex;
+}
+
+.button-div div {
+    margin-left: 1em
+}

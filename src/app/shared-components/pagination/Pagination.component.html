@@ -1,0 +1,38 @@
+<div class="app-wrapper">
+    <button nz-button class="previous-button" (click)="onClickPrevious()">
+        <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+        Previous
+    </button>
+    <div class="page-button">
+        <div *ngFor="let num of currentPageNumbers"
+        class="page-number-div"
+        (click)="onPageClick(num)"
+        [ngClass]="{'active-page' : num === selectedPage}"
+    >
+            <p> {{num}} </p>
+        </div>
+        <div class="three-dot-class" *ngIf="isDotsDisplayed()"> 
+            ...
+        </div>
+        <div 
+            class="page-number-div"
+            *ngIf="!isDotsDisplayed() 
+                && currentPageNumbers.length + 1 !== maxPageNumber"
+            (click)="onPageClick(maxPageNumber - 1)"
+            [ngClass]="{'active-page' : maxPageNumber - 1 === selectedPage}"
+        > 
+            <p> {{maxPageNumber - 1}} </p>
+        </div>
+        <div
+            class="page-number-div"
+            (click)="onPageClick(maxPageNumber)"
+            [ngClass]="{'active-page' : maxPageNumber === selectedPage}"
+        >
+            <p> {{maxPageNumber}} </p>
+        </div>
+    </div>
+    <button nz-button class="next-button" (click)="onClickNext()">
+        Next
+        <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
+    </button>
+</div>

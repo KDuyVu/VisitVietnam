@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+}
+
+:host {
+    width: 100%;
+    display: block;
+}
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+h1 {
+    font-family: 'Parisienne';
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    font-style: normal;
+    font-size: 110px;
+    margin: unset;
+}
+
+.page-header button:hover, .page-header button:focus {
+    color: pink;
+    border-color: pink;
+}
+
+@media screen and (min-width: 800px) {
+    .page-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .page-header button {
+        position: absolute;
+        right: 1em;
+    }
+}
+
+
+.travel-tip-cards {
+    display: flex;
+    padding-left: 8em;
+    padding-right: 8em;
+    width: 100%;
+}
+
+.travel-tip-cards app-travel-tip-card {
+    width: calc((100% - 4em) / 3);
+}
+
+.travel-tip-cards app-travel-tip-card:not(:last-child) {
+    margin-right: 2em;
+}
+
+app-pagination {
+    padding-bottom: 2em;
+}
