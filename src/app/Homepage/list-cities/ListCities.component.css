@@ -71,14 +71,25 @@ app-city-card:not(:last-child) {
 }
 
 .show-more-wrapper button {
+    padding-left: 1em;
     margin: 1em;
-    color: blueviolet;
-    border-color: blueviolet;
+    border-radius: 7px;
+}
+
+.show-more-wrapper button:not(:disabled) {
+    border: 3px solid #E8FAF6;
+    color: #3C8F7C;
+    background-color: #E8FAF6;
+}
+
+.show-more-wrapper button:disabled {
+    border: 3px solid #F5F5F5;
+    color: #9E9E9E;
+    background-color: #F5F5F5;
 }
 
 .show-more-wrapper button:hover:not(:disabled), .show-more-wrapper button:focus:not(:disabled){
-    color: pink;
-    border-color: pink;
+    border: 3px solid #CFEEE7;
 }
 
 .button-div {
@@ -86,5 +97,5 @@ app-city-card:not(:last-child) {
 }
 
 .button-div div {
-    margin-left: 1em
+    margin-right: 0.625em;
 }
