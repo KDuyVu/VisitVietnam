@@ -26,15 +26,19 @@
 }
 
 .page-button .page-number-div.active-page {
-    background-color: pink;
+    background-color: #E8FAF6;
+    color: #3C8F7C;
+    border-color: #E8FAF6;
 }
 
 .page-button .page-number-div p {
     margin: 0px;
+    border: 3px solid transparent;
 }
 
 .page-button .page-number-div:hover:not(.active-page) {
-    color: pink;
+    background-color: unset;
+    border: 3px solid #CFEEE7;
 }
 
 .app-wrapper {

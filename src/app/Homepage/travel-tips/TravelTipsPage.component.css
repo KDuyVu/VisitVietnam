@@ -26,9 +26,16 @@ h1 {
     margin: unset;
 }
 
+.page-header button {
+    color: #3C8F7C;
+    background-color: #E8FAF6;
+    border: 3px solid #E8FAF6;
+    border-radius: 7px;
+}
+
 .page-header button:hover, .page-header button:focus {
-    color: pink;
-    border-color: pink;
+    color: #3C8F7C;
+    border-color: #CFEEE7;
 }
 
 @media screen and (min-width: 800px) {
