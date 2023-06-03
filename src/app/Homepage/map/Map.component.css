@@ -42,7 +42,7 @@ path:hover {
 
 path.active {
     opacity: 0.5;
-    fill: #d300ff;
+    fill: #FF5757;
 }
 
 .map-div {
