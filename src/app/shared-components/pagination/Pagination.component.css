@@ -4,7 +4,7 @@
     padding-top: 1em;
     margin-top: 2em;
     display: flex;
-    border-top: 1px solid pink;
+    border-top: 1px solid #3C8F7C;
 }
 
 .page-button {
@@ -49,26 +49,25 @@
 }
 
 button[nz-button] {
-    border-color: white;
-    padding-left: 0px;
+    border: 3px solid #E8FAF6;
+    border-radius: 7px;
+    background-color: #E8FAF6;
+    color: #3C8F7C;
     padding-right: 0px;
 }
 
 button[nz-button].previous-button {
-    border-color: white;
     padding-right: 0.8em;
     padding-left: 0.5em;
 }
 
 button[nz-button].next-button {
-    border-color: white;
     padding-right: 0.5em;
     padding-left: 0.8em;
 }
 
 button[nz-button]:hover, button[nz-button]:focus {
-    border-color: rgb(201, 73, 94);
-    color: rgb(201, 73, 94);
+    border-color: #CFEEE7;
 }
 
 button[nz-button]:focus {
