@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+}
+
+.app-header {
+    font-family: 'Parisienne';
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+    font-size: 110px;
+}
+
+.item-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.item-row .left, .item-row .right{
+    width: 40vw;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    font-weight: 400;
+}
+
+
+.item-row .left {
+    margin-right: 4px;
+}
+
+.item-row .right {
+    margin-left: 4px;
+}
+
+.item-row.header {
+    font-size: 35px;
+    color: white;
+    text-align: center;
+}
+
+.item-row.header .left {
+    background-color: #00C2CB;
+}
+
+.item-row.header .right {
+    background-color: #FF5757;
+}
+
+.item-row:not(.header) div {
+    padding: 0.5em;
+    font-size: 23px;
+}
+
+.item-row:not(.header) .left {
+    background-color: #BDFAFD;
+}
+
+.item-row:not(.header) .right {
+    background-color: #FEDCDC;
+}

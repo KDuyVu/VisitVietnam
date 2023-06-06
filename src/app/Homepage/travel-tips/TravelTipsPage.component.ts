@@ -20,7 +20,6 @@ export class TravelTipsPageComponent {
                 if (!result) {
                     return;
                 }
-                console.log("ok restult : ",result);
                 this.travelTips = result;
             }
         )

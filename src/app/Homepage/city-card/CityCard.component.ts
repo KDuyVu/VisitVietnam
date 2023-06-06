@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Router } from "@angular/router";
 import { City, CityService, Photo, Tag } from "src/app/service/CityService.service";
 
 @Component({
@@ -20,6 +21,7 @@ export class CityCardComponent implements OnChanges {
     constructor(
         private cityService: CityService,
         private cdr: ChangeDetectorRef,
+        private router: Router,
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -35,11 +37,6 @@ export class CityCardComponent implements OnChanges {
         });
     }
 
-
-    redirectClick() {
-        window.open('https://www.google.com', '_blank');
-    }
-
     isTagClicked(tag: Tag): boolean {
         return this.selectedTagIds.has(tag.tagId);
     }
@@ -50,6 +47,10 @@ export class CityCardComponent implements OnChanges {
 
     isLoaded(id: number): boolean {
         return this.loadedImages.has(id);
+    }
+
+    onCardClicked() {
+        this.router.navigate(['/city', this.city.cityId]);
     }
 
     private processTags(): void {

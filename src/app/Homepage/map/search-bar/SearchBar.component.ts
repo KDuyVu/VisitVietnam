@@ -45,13 +45,10 @@ export class SearchBarComponent {
                     return;
                 }
 
-                console.log("hey: ",cities, regionCache);
                 this.allCities = cities;
                 this.regionCache = regionCache;
                 this.cityOptions = this.allCities.map(city => city.cityName);
                 this.initMaps();
-                console.log(this.listOfGroupOption);
-                console.log(this.listOfGroupOption);
             })
     }
 
@@ -65,11 +62,9 @@ export class SearchBarComponent {
     }
 
     onValueSelected(event: string): void {
-        console.log("Event : ",event);
         this.cityChanged.emit(this.allCities.filter(city => city.cityName === event).at(0));
         Array.from(this.selectedCityByBigRegionName.keys()).forEach(regionName => {
             this.selectedCityByBigRegionName[regionName] = null;
-            console.log("set ",regionName);
         })
         this.selectedCityByBigRegionName[this.bigRegionByCityName.get(event)] = event;
     }

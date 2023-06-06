@@ -34,7 +34,11 @@ import { CelebrationsComponent } from './Homepage/celebrations/celebrations.comp
 
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-
+import { CityPageComponent } from './CityPage/CityPage.component';
+import { CityWelcomeComponent } from './CityPage/welcome-component/CityWelcome.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CityExperienceComponent } from './CityPage/experience-component/CityExperience.component';
+import { WeatherComponent } from './CityPage/weather-component/Weather.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     SearchBarComponent,
     HeaderComponent,
     CelebrationsComponent,
-    FooterComponent
+    FooterComponent,
+    CityPageComponent,
+    CityWelcomeComponent,
+    CityExperienceComponent,
+    WeatherComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +85,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     NzIconModule.forRoot([ArrowLeftOutline, ArrowRightOutline]),
     
     NzCardModule,
-    NzGridModule
+    NzGridModule,
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 })
