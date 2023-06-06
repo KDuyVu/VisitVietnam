@@ -30,7 +30,6 @@ export class PaginationComponent implements OnChanges{
         this.selectedPage--;
         this.pageChanged.emit(this.selectedPage);
         this.reconstructCurrentPageNumbes();
-        console.log("what ",this.currentPageNumbers);
 
     }
 
@@ -41,14 +40,12 @@ export class PaginationComponent implements OnChanges{
         this.selectedPage++;
         this.pageChanged.emit(this.selectedPage);
         this.reconstructCurrentPageNumbes();
-        console.log("what ",this.currentPageNumbers);
     }
 
     onPageClick(pageNum: number): void {
         this.selectedPage = pageNum;
         this.pageChanged.emit(this.selectedPage);
         this.reconstructCurrentPageNumbes();
-        console.log("click ",pageNum);
     }
 
     isDotsDisplayed(): boolean {

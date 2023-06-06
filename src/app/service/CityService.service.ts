@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 
 export interface City {
     cityId?: number,
@@ -12,6 +12,7 @@ export interface City {
     region?: Region,
     tags?: Tag[],
     photos?: Photo[],
+    provinceLogo?: string,
 
 }
 
@@ -46,6 +47,13 @@ export interface TravelTip {
     text: string,
 }
 
+export interface CityExperience {
+    id: number,
+    activity: string,
+    places: string,
+    cityId: number,
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -61,6 +69,7 @@ export class CityService {
     private mapEntryDataSource = new BehaviorSubject<MapEntry[]>(null);
     private travelTipsSource = new BehaviorSubject<TravelTip[]>(null);
     private travelTipsCacheSource = new BehaviorSubject<TravelTip[]>(null);
+    private cityExperienceCacheSource = new BehaviorSubject<Map<number, CityExperience[]>>(null);
 
     cityDataSource$ = this.cityDataSource.asObservable();
     cityCacheDataSource$ = this.cityCacheDataSource.asObservable();
@@ -74,11 +83,13 @@ export class CityService {
     photoCacheDataSource$ = this.photoCacheDataSource.asObservable();
     mapEntryDataSource$ = this.mapEntryDataSource.asObservable();
     travelTipsCacheDataSource$ = this.travelTipsCacheSource.asObservable();
+    cityExperienceCacheSource$ = this.cityExperienceCacheSource.asObservable();
 
     private tagCache = new Map<number, Tag>();
     private regionCache = new Map<number, Region>();
     private photoCache = new Map<number, Photo>();
     private cityCache = new Map<number, City>();
+    private cityExperienceCache = new Map<number, CityExperience[]>();
 
     private readonly baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
     private readonly spreadsheetId = '1eO7bGeKYqZqnI9F7V4dClcmADSqRPq471ccVkNKqjXo';
@@ -97,7 +108,7 @@ export class CityService {
             }
         )
 
-        const getCitiesURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('City', 'A', 'AC', 63)}key=${this.apiKey}`;
+        const getCitiesURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('City', 'A', 'AD', 63)}key=${this.apiKey}`;
         
         console.log("getting cities");
         this.httpClient.get(getCitiesURL).subscribe(
@@ -146,6 +157,22 @@ export class CityService {
                 console.log("done getting travel tips");
             }
         )
+
+        const getCityExperienceUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('CityExperience', 'A', 'D', 7)}key=${this.apiKey}`;
+        
+        console.log("getting city experience");
+        this.httpClient.get(getCityExperienceUrl).subscribe(
+            (result: string) =>{
+                this.parseCityExperience(result);
+                console.log("done getting city experience");
+            }
+        )
+    }
+
+    getCityExperienceById(cityId: number): Observable<CityExperience[]> {
+        return this.cityExperienceCacheSource$.pipe(
+            map(map => map.get(cityId))
+        )
     }
 
     private constructRanges(sheetName: string, startColumn: string, endColumn: string, rowNum: number): string {
@@ -169,6 +196,7 @@ export class CityService {
                 regionId: Number(rawCity[4]),
                 photoIds: rawCity[11].split(',').map(Number),
                 tagIds: rawCity[16].split(',').map(Number),
+                provinceLogo: this.transformToViewablUrl(rawCity[29]),
             }
             cities.push(city);
             this.cityCache.set(city.cityId, city);
@@ -271,6 +299,31 @@ export class CityService {
         travelTips.sort((tip1, tip2) => tip2.tipId - tip1.tipId)
         this.travelTipsSource.next(travelTips);
         return travelTips;
+    }
+    
+    private parseCityExperience(returnValues: Object): void {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const datas = new Array<CityExperience>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawData: string[] = values[i];
+            const data: CityExperience = {
+                id: Number(rawData[0]),
+                activity: rawData[1],
+                places: rawData[2],
+                cityId: Number(rawData[3]),
+            }
+            datas.push(data);
+        }
+        datas.forEach((cityExperience) => {
+            if (!this.cityExperienceCache.has(cityExperience.cityId)) {
+                this.cityExperienceCache.set(cityExperience.cityId, [cityExperience]);
+            } else {
+                this.cityExperienceCache.get(cityExperience.cityId).push(cityExperience);
+            }
+        });
+
+        this.cityExperienceCacheSource.next(this.cityExperienceCache);
     }
 
     private transformToViewablUrl(driveUrl: string): string {

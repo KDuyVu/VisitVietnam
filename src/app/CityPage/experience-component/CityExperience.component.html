@@ -1,0 +1,19 @@
+<div
+    class="app-wrapper"
+    *ngIf="!!cityExperiences"
+>
+    <div class="app-header">
+        Let’s talk weather
+    </div>
+    <div class="item-row header">
+        <div class="left"> Experience </div>
+        <div class="right"> Potential Locations </div>
+    </div>
+    <div 
+        class="item-row"
+        *ngFor="let experience of cityExperiences"
+    >
+        <div class="left"> {{experience.activity}} </div>
+        <div class="right"> {{experience.places}} </div>
+    </div>
+</div>

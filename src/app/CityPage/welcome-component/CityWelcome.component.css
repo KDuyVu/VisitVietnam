@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+}
+
+.header-div {
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+}
+
+.header-div div {
+    font-size: 110px;
+    font-family: "Parisienne";
+}
+
+.header-div img {
+    height: 181px;
+    aspect-ratio: 1/1;
+    margin-left: 8em;
+}
+
+@media(max-width: 1200px) {
+    .header-div {
+        text-align: center;
+        display: block;
+    }
+}
