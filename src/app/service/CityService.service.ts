@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map, of } from 'rxjs';
 
 export interface City {
     cityId?: number,
@@ -54,6 +54,15 @@ export interface CityExperience {
     cityId: number,
 }
 
+export interface SampleItinerary {
+    id: number,
+    cityId: number,
+    day: number,
+    actions: string[],
+    header: string,
+    displayedOrder: number,
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -70,6 +79,7 @@ export class CityService {
     private travelTipsSource = new BehaviorSubject<TravelTip[]>(null);
     private travelTipsCacheSource = new BehaviorSubject<TravelTip[]>(null);
     private cityExperienceCacheSource = new BehaviorSubject<Map<number, CityExperience[]>>(null);
+    private itinerariesByCityId = new BehaviorSubject<Map<number, SampleItinerary[]>>(null);
 
     cityDataSource$ = this.cityDataSource.asObservable();
     cityCacheDataSource$ = this.cityCacheDataSource.asObservable();
@@ -84,12 +94,14 @@ export class CityService {
     mapEntryDataSource$ = this.mapEntryDataSource.asObservable();
     travelTipsCacheDataSource$ = this.travelTipsCacheSource.asObservable();
     cityExperienceCacheSource$ = this.cityExperienceCacheSource.asObservable();
+    itinerariesByCityId$ = this.itinerariesByCityId.asObservable();
 
     private tagCache = new Map<number, Tag>();
     private regionCache = new Map<number, Region>();
     private photoCache = new Map<number, Photo>();
     private cityCache = new Map<number, City>();
     private cityExperienceCache = new Map<number, CityExperience[]>();
+    private itinerariesByCityIdCache = new Map<number, SampleItinerary[]>();
 
     private readonly baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
     private readonly spreadsheetId = '1eO7bGeKYqZqnI9F7V4dClcmADSqRPq471ccVkNKqjXo';
@@ -167,12 +179,29 @@ export class CityService {
                 console.log("done getting city experience");
             }
         )
+
+        const getSampleItiernariesUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Itineraries', 'A', 'F', 560)}key=${this.apiKey}`;
+        
+        console.log("getting sample initeraries");
+        this.httpClient.get(getSampleItiernariesUrl).subscribe(
+            (result: string) =>{
+                this.parseSampleItineraries(result);
+                console.log("done getting sample initeraries");
+            }
+        )
     }
 
     getCityExperienceById(cityId: number): Observable<CityExperience[]> {
         return this.cityExperienceCacheSource$.pipe(
             map(map => map.get(cityId))
         )
+    }
+
+    getItinerariesByCityId(cityId: number): Observable<SampleItinerary[]> {
+        return this.itinerariesByCityId$.pipe(
+            filter(itinerariesMap => itinerariesMap !== null),
+            map(itinerariesMap => itinerariesMap.get(cityId))
+        );
     }
 
     private constructRanges(sheetName: string, startColumn: string, endColumn: string, rowNum: number): string {
@@ -324,6 +353,33 @@ export class CityService {
         });
 
         this.cityExperienceCacheSource.next(this.cityExperienceCache);
+    }
+
+    private parseSampleItineraries(returnValues): void {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const datas = new Array<SampleItinerary>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawData: string[] = values[i];
+            const data: SampleItinerary = {
+                id: Number(rawData[0]),
+                cityId: Number(rawData[1]),
+                day: Number(rawData[2]),
+                actions: String(rawData[3]).split('. '),
+                header: rawData[4],
+                displayedOrder: Number(rawData[5]),
+            }
+            datas.push(data);
+        }
+        datas.forEach((itinerary) =>{
+            if (!this.itinerariesByCityIdCache.has(itinerary.cityId)) {
+                this.itinerariesByCityIdCache.set(itinerary.cityId, []);
+            }
+            this.itinerariesByCityIdCache.get(itinerary.cityId).push(itinerary);
+        })
+
+        this.itinerariesByCityId.next(this.itinerariesByCityIdCache);
+
     }
 
     private transformToViewablUrl(driveUrl: string): string {

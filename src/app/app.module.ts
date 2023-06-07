@@ -39,6 +39,9 @@ import { CityWelcomeComponent } from './CityPage/welcome-component/CityWelcome.c
 import { AppRoutingModule } from './app-routing.module';
 import { CityExperienceComponent } from './CityPage/experience-component/CityExperience.component';
 import { WeatherComponent } from './CityPage/weather-component/Weather.component';
+import { SampleItineraryComopnent } from './CityPage/sample-itinerary/SampleItinerary.component';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { WeatherComponent } from './CityPage/weather-component/Weather.component
     CityWelcomeComponent,
     CityExperienceComponent,
     WeatherComponent,
+    SampleItineraryComopnent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,8 @@ import { WeatherComponent } from './CityPage/weather-component/Weather.component
     NzSelectModule,
     NzButtonModule,
     NzIconModule.forRoot([ArrowLeftOutline, ArrowRightOutline]),
-    
+    NzCollapseModule,
+    MatExpansionModule,
     NzCardModule,
     NzGridModule,
     AppRoutingModule,
