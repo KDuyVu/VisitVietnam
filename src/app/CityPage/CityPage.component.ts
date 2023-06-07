@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { combineLatest, switchMap } from "rxjs";
-import { City, CityExperience, CityService } from "../service/CityService.service";
+import { City, CityExperience, CityService, SampleItinerary } from "../service/CityService.service";
 
 @Component({
     selector: "app-city-page",
@@ -13,6 +13,8 @@ export class CityPageComponent implements OnInit{
     cityId: number = null;
     city: City = null;
     cityExperiences: CityExperience[] = null;
+    itineraries: SampleItinerary[] = null;
+    displayedOrderToItin = new Map<number, SampleItinerary[]>();
 
     constructor(
         private route: ActivatedRoute,
@@ -25,16 +27,37 @@ export class CityPageComponent implements OnInit{
     }
 
     ngOnInit() {
+        this.cityId = Number(this.route.snapshot.paramMap.get('id'));
+        console.log("id " ,this.cityId);
         combineLatest([this.route.paramMap, this.cityService.cityCacheDataSource$, this.cityService.cityExperienceCacheSource$])
             .subscribe(([params, cityCache, cityExperienceCache]) => {
                 if (!params || !cityCache || !cityExperienceCache) {
                     return;
                 }
-                this.cityId = Number(params.get('id'));
                 this.city = cityCache.get(this.cityId);
                 this.cityExperiences = cityExperienceCache.get(this.cityId);
                 this.cityExperiences = cityExperienceCache.get(32);
             }
         );
-      }
+
+        this.cityService.getItinerariesByCityId(this.cityId).subscribe(
+            (itineraries) => {
+                this.itineraries = itineraries;
+                this.processItineraries();
+            }
+        )
+    }
+
+    private processItineraries(): void {
+        this.displayedOrderToItin = new Map<number, SampleItinerary[]>();
+        this.itineraries.forEach(
+            (item) => {
+                if (!this.displayedOrderToItin.has(item.displayedOrder)) {
+                    this.displayedOrderToItin.set(item.displayedOrder, []);
+                }
+                this.displayedOrderToItin.get(item.displayedOrder).push(item);
+            }
+        )
+        console.log("huh ? ",this.displayedOrderToItin);
+    }
 }

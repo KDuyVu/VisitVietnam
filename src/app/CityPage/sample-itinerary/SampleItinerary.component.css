@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+}
+@font-face {
+    font-family: 'Besley';
+    src: url('../../../assets/fonts/Besley/Besley-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: 'Besley';
+    src: url('../../../assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf');
+}
+
+
+.app-header {
+    font-family: 'Parisienne';
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+    font-size: 110px;
+}
+
+.iframe-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.iframe-wrapper iframe{
+    width: 55vw;
+    height: calc(0.532 * 55vw);
+}
+
+.collapse-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-expansion-panel {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 55vw;
+}
+
+mat-panel-title {
+    font-family: 'Besley';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 85px;
+}
+
+mat-expansion-panel-header.mat-expansion-panel-header {
+    height: auto;
+}
+
+.day-items {
+}
+
+.day-items div {
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.day-items li {
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    padding-left: 1em;
+}
