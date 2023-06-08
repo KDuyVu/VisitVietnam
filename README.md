@@ -39,3 +39,4 @@ https://angular.io/guide/setup-local
 	$ #if you want to change the commit message
 	$ git commit --amend
 	$ git push -f
+4. Owned by Duy, Hung, Sinh
