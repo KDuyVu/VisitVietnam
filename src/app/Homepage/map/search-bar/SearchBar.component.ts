@@ -96,5 +96,11 @@ export class SearchBarComponent {
         });
 
         this.bigRegionNames.sort((name1, name2) => this.bigRegionNameToId.get(name1) - this.bigRegionNameToId.get(name2));
+
+        this.bigRegionNames.forEach(
+            (name) => {
+                this.nzOptionByBigRegionName.get(name).sort((option1, option2) => option1.groupLabel.localeCompare(option2.groupLabel));
+            }
+        )
     }
 }
