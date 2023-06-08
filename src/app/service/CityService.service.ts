@@ -45,6 +45,7 @@ export interface TravelTip {
     tipId: number,
     header: string,
     text: string,
+    preview?: string,
 }
 
 export interface CityExperience {
@@ -160,7 +161,7 @@ export class CityService {
             }
         )
 
-        const getTravelTipsUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('TravelTips', 'A', 'C', 17)}key=${this.apiKey}`;
+        const getTravelTipsUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('TravelTips', 'A', 'D', 8)}key=${this.apiKey}`;
         
         console.log("getting travel tips");
         this.httpClient.get(getTravelTipsUrl).subscribe(
@@ -322,6 +323,7 @@ export class CityService {
                 tipId: Number(rawtravelTip[0]),
                 header: rawtravelTip[1],
                 text: rawtravelTip[2],
+                preview: rawtravelTip[3],
             }
             travelTips.push(travelTip);
         }

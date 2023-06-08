@@ -11,6 +11,7 @@ export class TravelTipsPageComponent {
     travelTips: TravelTip[] = [];
     itemsPerPage: number = 3;
     currentPage: number = 1;
+    rectColors: string[] = ['#D8F7E6', '#FFEFE4', '#F7E8FF', '#E8F1FF', '#FBF1D9'];
 
     constructor(
         private cityService: CityService

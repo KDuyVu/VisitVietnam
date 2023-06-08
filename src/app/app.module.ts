@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ArrowLeftOutline, ArrowRightOutline } from '@ant-design/icons-angular/icons';
+import { ArrowLeftOutline, ArrowRightOutline, ArrowsAltOutline } from '@ant-design/icons-angular/icons';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -42,6 +42,9 @@ import { WeatherComponent } from './CityPage/weather-component/Weather.component
 import { SampleItineraryComopnent } from './CityPage/sample-itinerary/SampleItinerary.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { OverlayTipComponent } from './Homepage/travel-tips/overlay-tip/OverlayTip.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     CityExperienceComponent,
     WeatherComponent,
     SampleItineraryComopnent,
+    OverlayTipComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,12 +90,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
     NzSpinModule,
     NzSelectModule,
     NzButtonModule,
-    NzIconModule.forRoot([ArrowLeftOutline, ArrowRightOutline]),
+    NzIconModule.forRoot([ArrowLeftOutline, ArrowRightOutline, ArrowsAltOutline]),
     NzCollapseModule,
     MatExpansionModule,
     NzCardModule,
     NzGridModule,
     AppRoutingModule,
+    MatDialogModule,
+  ],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

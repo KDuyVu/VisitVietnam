@@ -5,3 +5,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     line-height: normal;
 }
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+    border-radius: 15px !important;
+}

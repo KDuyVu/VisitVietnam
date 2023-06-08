@@ -1,15 +1,19 @@
-<div class="app-wrapper">
+<div 
+    class="app-wrapper"
+    (click)="openOverlayTip()"
+    *ngIf="!!blog"
+>
     <div class="icon-wrapper">
         <mat-icon>open_in_new</mat-icon>
     </div>
     <div class="header">
-        <h1> {{header}} </h1>
+        <h1> {{blog.header}} </h1>
     </div>
     <div class="body">
-        <div class="image"> </div>
+        <div class="image" [style.background-color]="rectColor"> </div>
         <div class="text-wrapper"> 
             <div class="text">
-                {{text}}
+                {{blog.preview}}
             </div>
             <mat-icon>calendar_today</mat-icon>
         </div>

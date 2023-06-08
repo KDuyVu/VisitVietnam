@@ -10,7 +10,7 @@
 
 .app-wrapper:hover {
     cursor: pointer;
-    border: 1px solid pink;
+    border: 1px solid #CFEEE7;
 }
 
 .icon-wrapper {
@@ -21,6 +21,7 @@
 
 .header {
     text-align: center;
+    height: 10vh;
 }
 
 .body {
@@ -30,7 +31,6 @@
 
 .image {
     width: 30%;
-    background-color: aquamarine;
 }
 
 .text-wrapper {
@@ -39,5 +39,23 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #979797
+    color: #979797;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .page-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .page-header button {
+        position: absolute;
+        right: 1em;
+    }
 }
