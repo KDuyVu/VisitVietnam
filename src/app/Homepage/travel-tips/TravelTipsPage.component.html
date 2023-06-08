@@ -7,9 +7,9 @@
 </div>
 <div class="travel-tip-cards">
     <app-travel-tip-card
-        *ngFor="let travelTip of getDisplayedItems()"
-        [header]="travelTip.header"
-        [text]="travelTip.text"
+        *ngFor="let travelTip of getDisplayedItems(); index as i"
+        [blog]="travelTip"
+        [rectColor]="rectColors[i]"
     > </app-travel-tip-card>
 </div>
 <app-pagination

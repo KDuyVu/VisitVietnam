@@ -55,19 +55,19 @@ h1 {
 
 .travel-tip-cards {
     display: flex;
-    padding-left: 8em;
-    padding-right: 8em;
+    padding-left: 10em;
+    padding-right: 10em;
     width: 100%;
 }
 
 .travel-tip-cards app-travel-tip-card {
-    width: calc((100% - 4em) / 3);
+    width: calc((100% - 20em) / 3);
 }
 
 .travel-tip-cards app-travel-tip-card:not(:last-child) {
-    margin-right: 2em;
+    margin-right: 10em;
 }
 
 app-pagination {
-    padding-bottom: 2em;
+    padding-bottom: 10em;
 }
