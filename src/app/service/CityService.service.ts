@@ -13,7 +13,7 @@ export interface City {
     tags?: Tag[],
     photos?: Photo[],
     provinceLogo?: string,
-
+    thumbNail?: string,
 }
 
 export interface Region {
@@ -121,7 +121,7 @@ export class CityService {
             }
         )
 
-        const getCitiesURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('City', 'A', 'AD', 63)}key=${this.apiKey}`;
+        const getCitiesURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('City', 'A', 'AF', 63)}key=${this.apiKey}`;
         
         console.log("getting cities");
         this.httpClient.get(getCitiesURL).subscribe(
@@ -227,6 +227,7 @@ export class CityService {
                 photoIds: rawCity[11].split(',').map(Number),
                 tagIds: rawCity[16].split(',').map(Number),
                 provinceLogo: this.transformToViewablUrl(rawCity[29]),
+                thumbNail: this.transformToViewablUrl(rawCity[31]),
             }
             cities.push(city);
             this.cityCache.set(city.cityId, city);

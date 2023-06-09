@@ -2,22 +2,8 @@
     <div class="photo-section-div">
         <div class="photo-row-div">
             <div class="photo-wrapper"> 
-                <img (load)="onLoaded(0)" [src]="randomPhotos.length === 4 ? randomPhotos[0].photoUrl : ''" alt="My image">
+                <img (load)="onLoaded(0)" [src]="city ? city.thumbNail : ''" alt="My image">
                 <nz-spin *ngIf="!isLoaded(0)"></nz-spin>
-            </div>
-            <div class="photo-wrapper"> 
-                <img (load)="onLoaded(1)" [src]="randomPhotos.length === 4 ? randomPhotos[1].photoUrl : ''" alt="My image">
-                <nz-spin *ngIf="!isLoaded(1)"></nz-spin>
-            </div>
-        </div>
-        <div class="photo-row-div">
-            <div class="photo-wrapper"> 
-                <img (load)="onLoaded(2)" [src]="randomPhotos.length === 4 ? randomPhotos[2].photoUrl : ''" alt="My image">
-                <nz-spin *ngIf="!isLoaded(2)"></nz-spin>
-            </div>
-            <div class="photo-wrapper"> 
-                <img (load)="onLoaded(3)" [src]="randomPhotos.length === 4 ? randomPhotos[3].photoUrl : ''" alt="My image">
-                <nz-spin *ngIf="!isLoaded(3)"></nz-spin>
             </div>
         </div>
     </div>
