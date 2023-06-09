@@ -45,6 +45,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { OverlayTipComponent } from './Homepage/travel-tips/overlay-tip/OverlayTip.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PhotoGalerryComponent } from './CityPage/photo-gallery/PhotoGallery.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     WeatherComponent,
     SampleItineraryComopnent,
     OverlayTipComponent,
+    PhotoGalerryComponent,
   ],
   imports: [
     BrowserModule,

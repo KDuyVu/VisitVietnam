@@ -3,11 +3,14 @@
     src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
 }
 
+.app-wrapper {
+    width: 100%;
+}
+
 .app-header {
     font-family: 'Parisienne';
     display: flex;
     justify-content: center;
-    padding-top: 1em;
     font-size: 110px;
 }
 
@@ -18,7 +21,7 @@
 }
 
 .item-row .left, .item-row .right{
-    width: 40vw;
+    width: 50%;
     padding-top: 0.4em;
     padding-bottom: 0.4em;
     font-weight: 400;
