@@ -42,6 +42,7 @@ app-info-banner {
 
 .photo-row-div {
     display: flex;
+    margin-top: 2em;
 }
 
 .photo-container-div {
