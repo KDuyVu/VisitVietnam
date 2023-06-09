@@ -1,0 +1,119 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+.app-wrapper {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.photo-1 {
+    aspect-ratio: 306/330;
+    background-color: antiquewhite;
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+.photo-2 {
+    aspect-ratio: 306/184;
+    background-color: pink;
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+.photo-3 {
+    aspect-ratio: 306/244;
+    background-color: palegreen;
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+.photo-4 {
+    aspect-ratio: 306/364;
+    background-color: red;
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+.photo-5 {
+    aspect-ratio: 625/175;
+    background-color: orange;
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+.photo-6 {
+    aspect-ratio: 306/224;
+    background-color: black;
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+.photo-7 {
+    aspect-ratio: 306/235;
+    background-color: rgb(193, 192, 255);
+    width: calc(100%-1em);
+    margin: 0.5em;
+    border: 1px;
+}
+
+
+.photo-div-1 {
+    width: 28.5%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.photo-div-23 {
+    width: 24.1%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.photo-div-4567 {
+    width: calc(100% - 28.5% - 24.1%);
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.photo-div-4567 .photo-div-467 {
+    display: flex;
+}
+
+.photo-div-4567 .photo-div-4 {
+    width: 50%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.photo-div-4567 .photo-div-67 {
+    width: 50%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+button[nz-button] {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+}
+
+button[nz-button] {
+    color: #3C8F7C;
+    background-color: #E8FAF6;
+    border: 3px solid #E8FAF6;
+    border-radius: 7px;
+}
+
+button[nz-button]:hover, button[nz-button]:focus {
+    color: #3C8F7C;
+    border-color: #CFEEE7;
+}
