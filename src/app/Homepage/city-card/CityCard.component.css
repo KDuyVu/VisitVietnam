@@ -14,7 +14,8 @@
 
 .wrapper:hover {
     cursor: pointer;
-    border: 1px solid pink;
+    border: 1px solid #CFEEE7
+    ;
 }
 
 .photo-row-div {
