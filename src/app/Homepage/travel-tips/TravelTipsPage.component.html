@@ -1,7 +1,7 @@
 <div class="page-header">
     <h1> Travel tips </h1>
     <button nz-button>
-        View more
+        View all
         <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
     </button>
 </div>
@@ -10,6 +10,8 @@
         *ngFor="let travelTip of getDisplayedItems(); index as i"
         [blog]="travelTip"
         [rectColor]="rectColors[i]"
+        [height]="maxHeightStr"
+        (headerHeight)="onCardHeaderChanged($event)"
     > </app-travel-tip-card>
 </div>
 <app-pagination

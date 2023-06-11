@@ -26,8 +26,8 @@
 }
 
 .iframe-wrapper iframe{
-    width: 55vw;
-    height: calc(0.532 * 55vw);
+    width: 100%;
+    height: 60vh;
 }
 
 .collapse-wrapper {
@@ -35,12 +35,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 mat-expansion-panel {
     margin-top: 1em;
     margin-bottom: 1em;
-    width: 55vw;
+    width: 100%;
 }
 
 mat-panel-title {

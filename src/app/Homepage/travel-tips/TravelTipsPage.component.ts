@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, QueryList, ViewChildren } from "@angular/core";
 import { CityService, TravelTip } from "src/app/service/CityService.service";
+import { TravelTipsCardComponent } from "./travel-tips-card/TravelTipsCard.component";
 
 @Component({
     selector: "app-travel-tips-page",
@@ -12,6 +13,8 @@ export class TravelTipsPageComponent {
     itemsPerPage: number = 3;
     currentPage: number = 1;
     rectColors: string[] = ['#D8F7E6', '#FFEFE4', '#F7E8FF', '#E8F1FF', '#FBF1D9'];
+    maxHeightInt: number = 0;
+    maxHeightStr: string = null;
 
     constructor(
         private cityService: CityService
@@ -28,6 +31,12 @@ export class TravelTipsPageComponent {
 
     onPageChanged(pageNumber: number): void {
         this.currentPage = pageNumber;
+    }
+
+    onCardHeaderChanged(height: number) {
+      this.maxHeightInt = Math.max(this.maxHeightInt, height);
+      console.log("height : ",this.maxHeightInt);
+      this.maxHeightStr = `${this.maxHeightInt}px`;
     }
 
     getDisplayedItems(): TravelTip[] {

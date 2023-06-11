@@ -19,8 +19,32 @@
     justify-content: end;
 }
 
-.header {
-    text-align: center;
+@media screen and (min-width: 1100.1px) {
+  .header {
+      text-align: center;
+      min-height: 250px;
+  }
+}
+
+@media screen and (min-width: 1100.1px) {
+  .header {
+      text-align: center;
+      min-height: 250px;
+  }
+}
+
+@media screen and (min-width: 1200.1px) {
+  .header {
+      text-align: center;
+      min-height: 200px;
+  }
+}
+
+@media screen and (min-width: 1400.1px) {
+  .header {
+      text-align: center;
+      min-height: 150px;
+  }
 }
 
 .body {
@@ -41,6 +65,7 @@
     color: #979797;
     font-size: 16px;
     font-weight: 400;
+    overflow: hidden;
 }
 
 
