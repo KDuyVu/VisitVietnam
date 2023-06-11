@@ -1,6 +1,6 @@
 
 html, body { height: 100%; }
-body { 
+body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     line-height: normal;
@@ -8,4 +8,25 @@ body {
 
 .mat-mdc-dialog-surface.mdc-dialog__surface {
     border-radius: 15px !important;
+}
+
+#ww_757c2bc9d43ee .ww_hour {
+  width: unset !important;
+}
+
+#ww_757c2bc9d43ee .ww_arr.ww_arr_right {
+  background-color: unset;
+}
+
+#ww_757c2bc9d43ee .ww_arr.ww_arr_left {
+  background-color: unset;
+}
+
+
+#ww_757c2bc9d43ee .ww_noselect.ww_hours {
+  margin-top: 1em;
+}
+
+#ww_757c2bc9d43ee .ww_delimiter {
+  background-color: green !important;
 }

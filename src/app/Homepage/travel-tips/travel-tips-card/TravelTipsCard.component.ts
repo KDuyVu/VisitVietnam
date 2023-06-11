@@ -1,21 +1,25 @@
-import { Component, Input } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { OverlayTipComponent } from "../overlay-tip/OverlayTip.component";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TravelTip } from "src/app/service/CityService.service";
+import { EventEmitter } from "@angular/core";
 
 @Component({
     selector: "app-travel-tip-card",
     templateUrl: "./TravelTipsCard.component.html",
     styleUrls: ["./TravelTipsCard.component.css"]
 })
-export class TravelTipsCardComponent {
+export class TravelTipsCardComponent  {
     @Input() blog: TravelTip = null;
     @Input() rectColor: string = '#FBF1D9';
+    @Input() height: string = null;
+    @Output() headerHeight = new EventEmitter<number>;
 
     constructor(
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private cdr: ChangeDetectorRef,
     ) { }
 
     openOverlayTip() {
