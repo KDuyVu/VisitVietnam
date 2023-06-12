@@ -4,7 +4,7 @@
 <app-filter-bar (onSelectedTagsChanged)="onSelectedTagsChanged($event)">
 </app-filter-bar>
 
-<div class="photo-container-wrapper">
+<div #photoContainerStart class="photo-container-wrapper">
   <div class="photo-container-div">
     <div
       *ngFor="let row of getFirstNthRowOfCities(showedRow)"
@@ -36,7 +36,7 @@
   <button
     nz-button
     nzType="default"
-    (click)="onCollapseAllButtonClicked()"
+    (click)="onCollapseAllButtonClicked(photoContainerStart)"
     [disabled]="isCollapseAllButtonDisabled()"
   >
     <div class="button-div">

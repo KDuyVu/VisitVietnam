@@ -1,13 +1,15 @@
 <app-city-welcome-component [city]="city"> </app-city-welcome-component>
 <div class="component-wrapper">
-    <app-photo-gallery> </app-photo-gallery>
+  <app-photo-gallery> </app-photo-gallery>
 </div>
 <div class="component-wrapper">
-    <app-city-experience [cityExperiences]="cityExperiences"> </app-city-experience>
+  <app-city-experience [cityExperiences]="cityExperiences">
+  </app-city-experience>
 </div>
 <div class="component-wrapper">
-    <app-sample-itinerary [displayedOrderToItin]="displayedOrderToItin"> </app-sample-itinerary>
+  <app-sample-itinerary [displayedOrderToItin]="displayedOrderToItin">
+  </app-sample-itinerary>
 </div>
 <div class="component-wrapper">
-    <app-weather-component> </app-weather-component>
+  <app-weather-component [city]="city"> </app-weather-component>
 </div>
