@@ -44,7 +44,7 @@ export class ListCitiesComponent implements OnInit {
                     // this.regionIdToCities.set(region.regionId, this.cityService.getCitiesByRegionId(region.regionId));
                     this.regionIdToCities.set(region.regionId, this.allCities.filter(city => city.regionId === region.regionId));
                 });
-                
+
                 this.addTagPhotoRegionToCities();
                 this.filteredCities = this.allCities;
                 this.resetDisplayedCities();
@@ -98,8 +98,9 @@ export class ListCitiesComponent implements OnInit {
         this.showedRow = this.displayedCities.length;
     }
 
-    onCollapseAllButtonClicked(): void {
+    onCollapseAllButtonClicked(target: HTMLElement): void {
         this.showedRow = Math.min(this.displayedCities.length, this.minRowDisplayed);
+        target.scrollIntoView();
     }
 
     isShowLessButtonDisabled() {
