@@ -12,7 +12,7 @@
 .photo-1 {
     aspect-ratio: 306/330;
     background-color: antiquewhite;
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
@@ -20,7 +20,7 @@
 .photo-2 {
     aspect-ratio: 306/184;
     background-color: pink;
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
@@ -28,7 +28,7 @@
 .photo-3 {
     aspect-ratio: 306/244;
     background-color: palegreen;
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
@@ -36,7 +36,7 @@
 .photo-4 {
     aspect-ratio: 306/364;
     background-color: red;
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
@@ -44,7 +44,7 @@
 .photo-5 {
     aspect-ratio: 625/175;
     background-color: orange;
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
@@ -52,7 +52,7 @@
 .photo-6 {
     aspect-ratio: 306/224;
     background-color: black;
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
@@ -60,7 +60,7 @@
 .photo-7 {
     aspect-ratio: 306/235;
     background-color: rgb(193, 192, 255);
-    width: calc(100%-1em);
+    width: calc(100% - 1em);
     margin: 0.5em;
     border: 1px;
 }
