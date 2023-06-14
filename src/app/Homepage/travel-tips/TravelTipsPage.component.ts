@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, QueryList, ViewChildren } from "@angular/core";
+import { Component } from "@angular/core";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { CityService, TravelTip } from "src/app/service/CityService.service";
-import { TravelTipsCardComponent } from "./travel-tips-card/TravelTipsCard.component";
+import { OverlayTipComponent } from "src/app/shared-components/overlay-tip/OverlayTip.component";
 
 @Component({
     selector: "app-travel-tips-page",
@@ -10,6 +12,7 @@ import { TravelTipsCardComponent } from "./travel-tips-card/TravelTipsCard.compo
 export class TravelTipsPageComponent {
 
     travelTips: TravelTip[] = [];
+    travelTipsCache = new Map<number, TravelTip>();
     itemsPerPage: number = 3;
     currentPage: number = 1;
     rectColors: string[] = ['#D8F7E6', '#FFEFE4', '#F7E8FF', '#E8F1FF', '#FBF1D9'];
@@ -17,14 +20,17 @@ export class TravelTipsPageComponent {
     maxHeightStr: string = null;
 
     constructor(
-        private cityService: CityService
+        public dialog: MatDialog,
+        private cityService: CityService,
+        private router: Router,
     ) {
-        this,cityService.travelTipsDataSource$.subscribe(
-            (result: TravelTip[]) => {
+        this.cityService.travelTipsCacheDataSource$.subscribe(
+            (result) => {
                 if (!result) {
                     return;
                 }
-                this.travelTips = result;
+                this.travelTipsCache = result;
+                this.travelTips = Array.from(result.values());
             }
         )
     }
@@ -33,14 +39,29 @@ export class TravelTipsPageComponent {
         this.currentPage = pageNumber;
     }
 
-    onCardHeaderChanged(height: number) {
-      this.maxHeightInt = Math.max(this.maxHeightInt, height);
-      console.log("height : ",this.maxHeightInt);
-      this.maxHeightStr = `${this.maxHeightInt}px`;
-    }
-
     getDisplayedItems(): TravelTip[] {
         const actualLayer = this.currentPage - 1;
         return this.travelTips.slice(this.itemsPerPage * actualLayer, Math.min((actualLayer + 1) * this.itemsPerPage, this.travelTips.length));
+    }
+
+    onCardClicked(blogId: number): void {
+      const blog: TravelTip = this.travelTipsCache.get(blogId);
+      const dialogConfig: MatDialogConfig = {
+          maxHeight: '80vh',
+          maxWidth: '70vw',
+          data: {text: blog.text, isOpenInNewTab : true, blog: blog},
+        };
+      const dialogRef = this.dialog.open(OverlayTipComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        (result: any) => {
+          if (!!result && result['openInNewTab'] === true) {
+            this.router.navigate(['blogs', blog.tipId]);
+          }
+        }
+      )
+    }
+
+    onViewAllClicked(): void {
+      this.router.navigate(['/blogs']);
     }
 }

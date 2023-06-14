@@ -25,10 +25,10 @@ import { MapComponent } from './Homepage/map/Map.component';
 import { SearchBarComponent } from './Homepage/map/search-bar/SearchBar.component';
 import { InfoBannerComponent } from './Homepage/share/info-banner/InfoBanner.component';
 import { TravelTipsPageComponent } from './Homepage/travel-tips/TravelTipsPage.component';
-import { TravelTipsCardComponent } from './Homepage/travel-tips/travel-tips-card/TravelTipsCard.component';
+import { TravelTipsCardComponent } from './shared-components/travel-tips-card/TravelTipsCard.component';
 import { AppComponent } from './app.component';
 import { PaginationComponent } from './shared-components/pagination/Pagination.component';
-import { FooterComponent } from './Homepage/footer/footer.component';
+import { FooterComponent } from './shared-components/footer/footer.component';
 import { HeaderComponent } from './Homepage/header/header.component';
 import { CelebrationsComponent } from './Homepage/celebrations/celebrations.components';
 
@@ -43,9 +43,12 @@ import { SampleItineraryComopnent } from './CityPage/sample-itinerary/SampleItin
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { OverlayTipComponent } from './Homepage/travel-tips/overlay-tip/OverlayTip.component';
+import { OverlayTipComponent } from './shared-components/overlay-tip/OverlayTip.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PhotoGalerryComponent } from './CityPage/photo-gallery/PhotoGallery.component';
+import { BlogComponent } from './BlogPage/Blog.component';
+import { BlogPostsComponent } from './BlogPage/blogs/Blogs.component';
+import { BlogWelcomeComponent } from './BlogPage/welcome/Welcome.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,9 @@ import { PhotoGalerryComponent } from './CityPage/photo-gallery/PhotoGallery.com
     SampleItineraryComopnent,
     OverlayTipComponent,
     PhotoGalerryComponent,
+    BlogComponent,
+    BlogPostsComponent,
+    BlogWelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +105,10 @@ import { PhotoGalerryComponent } from './CityPage/photo-gallery/PhotoGallery.com
     NzGridModule,
     AppRoutingModule,
     MatDialogModule,
+  ],
+  exports: [
+    TravelTipsCardComponent,
+    PaginationComponent,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy}

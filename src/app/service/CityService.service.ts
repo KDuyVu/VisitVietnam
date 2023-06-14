@@ -78,7 +78,7 @@ export class CityService {
     private photoCacheDataSource = new BehaviorSubject<Map<number, Photo>>(null);
     private mapEntryDataSource = new BehaviorSubject<MapEntry[]>(null);
     private travelTipsSource = new BehaviorSubject<TravelTip[]>(null);
-    private travelTipsCacheSource = new BehaviorSubject<TravelTip[]>(null);
+    private travelTipsCacheSource = new BehaviorSubject<Map<number, TravelTip>>(null);
     private cityExperienceCacheSource = new BehaviorSubject<Map<number, CityExperience[]>>(null);
     private itinerariesByCityId = new BehaviorSubject<Map<number, SampleItinerary[]>>(null);
 
@@ -103,6 +103,7 @@ export class CityService {
     private cityCache = new Map<number, City>();
     private cityExperienceCache = new Map<number, CityExperience[]>();
     private itinerariesByCityIdCache = new Map<number, SampleItinerary[]>();
+    private travelTipsCache = new Map<number, TravelTip>();
 
     private readonly baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
     private readonly spreadsheetId = '1eO7bGeKYqZqnI9F7V4dClcmADSqRPq471ccVkNKqjXo';
@@ -112,7 +113,7 @@ export class CityService {
         private httpClient: HttpClient
     ) {
         const getRegionsURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Region', 'A', 'E', 8)}key=${this.apiKey}`;
-        
+
         console.log("getting regions");
         this.httpClient.get(getRegionsURL).subscribe(
             (result: string) =>{
@@ -122,7 +123,7 @@ export class CityService {
         )
 
         const getCitiesURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('City', 'A', 'AF', 63)}key=${this.apiKey}`;
-        
+
         console.log("getting cities");
         this.httpClient.get(getCitiesURL).subscribe(
             (result: string) =>{
@@ -132,7 +133,7 @@ export class CityService {
         )
 
         const getTagsUrl = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Tag', 'A', 'C', 9)}key=${this.apiKey}`;
-        
+
         console.log("getting tags");
         this.httpClient.get(getTagsUrl).subscribe(
             (result: string) =>{
@@ -142,7 +143,7 @@ export class CityService {
         )
 
         const getPhotoUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Photo', 'A', 'B', 252)}key=${this.apiKey}`;
-        
+
         console.log("getting photos");
         this.httpClient.get(getPhotoUrl).subscribe(
             (result: string) =>{
@@ -152,7 +153,7 @@ export class CityService {
         )
 
         const getMapEtriesUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Map', 'A', 'D', 63)}key=${this.apiKey}`;
-        
+
         console.log("getting map entries");
         this.httpClient.get(getMapEtriesUrl).subscribe(
             (result: string) =>{
@@ -162,7 +163,7 @@ export class CityService {
         )
 
         const getTravelTipsUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('TravelTips', 'A', 'D', 8)}key=${this.apiKey}`;
-        
+
         console.log("getting travel tips");
         this.httpClient.get(getTravelTipsUrl).subscribe(
             (result: string) =>{
@@ -172,7 +173,7 @@ export class CityService {
         )
 
         const getCityExperienceUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('CityExperience', 'A', 'D', 7)}key=${this.apiKey}`;
-        
+
         console.log("getting city experience");
         this.httpClient.get(getCityExperienceUrl).subscribe(
             (result: string) =>{
@@ -182,7 +183,7 @@ export class CityService {
         )
 
         const getSampleItiernariesUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Itineraries', 'A', 'F', 560)}key=${this.apiKey}`;
-        
+
         console.log("getting sample initeraries");
         this.httpClient.get(getSampleItiernariesUrl).subscribe(
             (result: string) =>{
@@ -212,7 +213,7 @@ export class CityService {
         }
         return range;
     }
-    
+
     private parseCity(returnValues: Object): City[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
@@ -237,7 +238,7 @@ export class CityService {
         this.cityCacheDataSource.next(this.cityCache);
         return cities;
     }
-    
+
     private parseRegion(returnValues: Object): Region[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
@@ -258,7 +259,7 @@ export class CityService {
         this.regionCacheDataSource.next(this.regionCache);
         return regions;
     }
-    
+
     private parseTag(returnValues: Object): Tag[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
@@ -277,7 +278,7 @@ export class CityService {
         this.tagCacheDataSource.next(this.tagCache);
         return tags;
     }
-    
+
     private parsePhoto(returnValues: Object): Photo[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
@@ -295,7 +296,7 @@ export class CityService {
         this.photoCacheDataSource.next(this.photoCache);
         return photos;
     }
-    
+
     private parseMapEntry(returnValues: Object): MapEntry[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
@@ -313,7 +314,7 @@ export class CityService {
         this.mapEntryDataSource.next(mapEntries);
         return mapEntries;
     }
-    
+
     private parseTravelTips(returnValues: Object): TravelTip[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
@@ -327,12 +328,14 @@ export class CityService {
                 preview: rawtravelTip[3],
             }
             travelTips.push(travelTip);
+            this.travelTipsCache.set(travelTip.tipId, travelTip);
         }
         travelTips.sort((tip1, tip2) => tip2.tipId - tip1.tipId)
         this.travelTipsSource.next(travelTips);
+        this.travelTipsCacheSource.next(this.travelTipsCache);
         return travelTips;
     }
-    
+
     private parseCityExperience(returnValues: Object): void {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);

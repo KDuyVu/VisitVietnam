@@ -1,0 +1,22 @@
+.footer-div {
+  display: flex;
+  position: relative;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  min-height: 70vh;
+  margin-top: 20px;
+}
+
+.footer-div .image-div {
+  display: inline;
+  max-width: 50vh;
+}
+
+.footer-div .image-div {
+  z-index: 10;
+  margin-bottom: -1em;
+}
+
+.footer-div .image-div img{
+  width: 100%;
+}

@@ -1,0 +1,35 @@
+.app-wrapper {
+    max-height: 70vh;
+    overflow-y: scroll;
+    margin: 1em;
+}
+
+span {
+    cursor: pointer;
+}
+
+#html-wrapper {
+    padding: 2em;
+    background: #FFFFFF;
+    border-radius: 15px;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+    border-radius: 15px;
+}
+
+.icon-wrapper {
+    font-size: 2em;
+    display: flex;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+}
+
+.icon-wrapper .arrow-button {
+    margin-right:auto
+}
+
+.icon-wrapper .close-button {
+    margin-left:auto
+}

@@ -1,0 +1,14 @@
+<div class="blog-posts">
+  <div
+    class="travel-tip-cards"
+    *ngFor="let row of rows; index as i"
+  >
+    <app-travel-tip-card
+      *ngFor="let travelTip of row; index as e"
+      [blog]="travelTip"
+      [rectColor]="rectColors[(i * rows.length + e) % rectColors.length]"
+      [isOpenInNewTab]="false"
+      (cardClicked)="onCardClicked($event)"
+    > </app-travel-tip-card>
+  </div>
+</div>
