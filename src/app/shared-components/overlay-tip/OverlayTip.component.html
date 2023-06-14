@@ -1,0 +1,20 @@
+<div class="app-wrapper">
+    <div class="icon-wrapper">
+        <span
+            *ngIf="isOpenInNewTab"
+            nz-icon nzType="arrows-alt"
+            nzTheme="outline"
+            class="arrow-button"
+            (click)="openBlogInNewTab()"
+        >
+        </span>
+        <span
+            class="close-button"
+            nz-icon nzType="close"
+            nzTheme="outline"
+            (click)="onCloseClick()"
+        >
+        </span>
+    </div>
+    <div id="html-wrapper"> </div>
+</div>

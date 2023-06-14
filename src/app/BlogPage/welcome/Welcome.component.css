@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'Parisienne';
+  src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+}
+@font-face {
+    font-family: 'Besley';
+    src: url('../../../assets/fonts/Besley/Besley-VariableFont_wght.ttf');
+}
+
+.header-container {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 2em;
+  background-image: url(../../../assets/Photos/7_Ha_Long_Bay_Island.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.header-div {
+  font-size: 110px;
+  font-family: "Parisienne";
+}
+
+.header-container .header-info {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  max-width: 456px;
+}
+
+.header-container .header-info .first-word {
+  color: #12C6CE;
+}
+
+.header-container .header-info .third-word {
+  color: #FF5858;
+}
+
+@media(max-width: 1200px) {
+  .header-div {
+      text-align: center;
+      display: block;
+  }
+}
