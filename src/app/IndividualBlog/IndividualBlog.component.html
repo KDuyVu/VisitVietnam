@@ -1,0 +1,13 @@
+<div id="html-wrapper"></div>
+<div class="break">
+  <hr>
+</div>
+<div class="view-more-div">
+  <app-travel-tips-page
+    (cardClicked)="onCardClicked($event)"
+    [hiddenBlogIds]="[blog?.tipId]"
+    [header]="'View more'"
+  >
+  </app-travel-tips-page>
+</div>
+<app-footer> </app-footer>

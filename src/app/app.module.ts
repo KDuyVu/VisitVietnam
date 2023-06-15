@@ -24,7 +24,7 @@ import { ListCitiesComponent } from './Homepage/list-cities/ListCities.component
 import { MapComponent } from './Homepage/map/Map.component';
 import { SearchBarComponent } from './Homepage/map/search-bar/SearchBar.component';
 import { InfoBannerComponent } from './Homepage/share/info-banner/InfoBanner.component';
-import { TravelTipsPageComponent } from './Homepage/travel-tips/TravelTipsPage.component';
+import { TravelTipsPageComponent } from './shared-components/travel-tips/TravelTipsPage.component';
 import { TravelTipsCardComponent } from './shared-components/travel-tips-card/TravelTipsCard.component';
 import { AppComponent } from './app.component';
 import { PaginationComponent } from './shared-components/pagination/Pagination.component';
@@ -49,6 +49,7 @@ import { PhotoGalerryComponent } from './CityPage/photo-gallery/PhotoGallery.com
 import { BlogComponent } from './BlogPage/Blog.component';
 import { BlogPostsComponent } from './BlogPage/blogs/Blogs.component';
 import { BlogWelcomeComponent } from './BlogPage/welcome/Welcome.component';
+import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { BlogWelcomeComponent } from './BlogPage/welcome/Welcome.component';
     BlogComponent,
     BlogPostsComponent,
     BlogWelcomeComponent,
+    IndividualBlogComponent,
   ],
   imports: [
     BrowserModule,

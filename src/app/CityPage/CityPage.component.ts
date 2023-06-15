@@ -21,7 +21,7 @@ export class CityPageComponent implements OnInit{
         private cityService: CityService,
     ) {
         this.myScriptElement = document.createElement("script");
-        this.myScriptElement.src = 'https://app1.weatherwidget.org/js/?id=ww_757c2bc9d43ee';
+        this.myScriptElement.src = '//embedr.flickr.com/assets/client-code.js';
         this.myScriptElement.async = true;
         document.body.appendChild(this.myScriptElement);
     }
@@ -58,6 +58,5 @@ export class CityPageComponent implements OnInit{
                 this.displayedOrderToItin.get(item.displayedOrder).push(item);
             }
         )
-        console.log("huh ? ",this.displayedOrderToItin);
     }
 }
