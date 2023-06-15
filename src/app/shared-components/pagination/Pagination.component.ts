@@ -8,19 +8,26 @@ import { EventEmitter } from "@angular/core";
 export class PaginationComponent implements OnChanges{
     @Input() itemsSize: number = 1;
     @Input() itemPerPage: number = 1;
+    @Input() selectedPage: number = 1;
+
     @Output() pageChanged = new EventEmitter<number>();
 
 
     maxPageNumber: number = 1;
     currentPageNumbers: number[] = [];
     numberOfPagesToChoose: number = 4;
-    selectedPage: number = 1;
 
     ngOnChanges(changes: SimpleChanges): void {
+      if ('itemsSize' in changes || 'itemPerPage' in changes) {
         this.maxPageNumber = Math.ceil(this.itemsSize / this.itemPerPage);
         for (let i = 1 ; i <= Math.min(this.numberOfPagesToChoose - 1, this.maxPageNumber - 1) ; i++) {
             this.currentPageNumbers.push(i);
+            console.log("opk ",this.currentPageNumbers);
         }
+      }
+      if (this.itemsSize > 0 && 'selectPage' in changes) {
+        this.onPageClick(this.selectedPage);
+      }
     }
 
     onClickPrevious(): void {
@@ -53,6 +60,7 @@ export class PaginationComponent implements OnChanges{
     }
 
     private reconstructCurrentPageNumbes(): void {
+        console.log("redo ",this.currentPageNumbers);
         if (this.currentPageNumbers.length + 1 === this.maxPageNumber) {
             return;
         }

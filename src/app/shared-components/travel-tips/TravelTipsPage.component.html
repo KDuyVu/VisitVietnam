@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1> Travel tips </h1>
+    <h1> {{header}} </h1>
     <button
       nz-button
       (click)="onViewAllClicked()">
@@ -21,4 +21,5 @@
     [itemPerPage]="travelTips ? 3 : 1"
     [itemsSize]="!travelTips ? 1 : travelTips.length"
     (pageChanged)="onPageChanged($event)"
+    [(selectedPage)]="currentPage"
 > </app-pagination>

@@ -1,6 +1,10 @@
 <app-header> </app-header>
 <app-map></app-map>
-<app-list-cities ></app-list-cities>
-<app-travel-tips-page> </app-travel-tips-page>
+<div class="travel-tips-div">
+  <app-list-cities ></app-list-cities>
+</div>
+<div class="travel-tips-div">
+  <app-travel-tips-page (cardClicked)="onCardClicked($event)"> </app-travel-tips-page>
+</div>
 <app-celebrations> </app-celebrations>
 <app-footer> </app-footer>

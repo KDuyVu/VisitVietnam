@@ -31,8 +31,6 @@ export class OverlayTipComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/;
-
         const element = document.getElementById('html-wrapper');
         this.content = this.content.replace(/<body([^>]*)>/i, '<div class="body-wrapper"><body$1>');
         this.content = this.content.replace(/<\/body>/i, '</body></div>');
@@ -41,7 +39,6 @@ export class OverlayTipComponent implements OnInit {
           return `${p1}${modifiedRules}${p3}`;
         });
         element.innerHTML = this.content;
-        this.cdr.detectChanges();
     }
 
     onCloseClick(): void {

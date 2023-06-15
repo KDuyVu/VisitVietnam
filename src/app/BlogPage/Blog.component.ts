@@ -45,7 +45,6 @@ export class BlogComponent implements OnInit {
   }
 
   onCardClicked(blogId: number): void {
-    this.location.replaceState(`/blogs/${blogId}`);
     this.displayBlogDialog(blogId);
   }
 
@@ -69,13 +68,17 @@ export class BlogComponent implements OnInit {
       maxWidth: '70vw',
       data: {
         text: this.travelTipsCache.get(Number(blogId)).text,
-        isOpenInNewTab: false,
+        isOpenInNewTab: true,
         blog: this.travelTipsCache.get(Number(blogId)),
       },
     };
     const dialogRef = this.dialog.open(OverlayTipComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((value: any) => {
-      this.location.replaceState('/blogs');
-    });
+    dialogRef.afterClosed().subscribe(
+      (value: any) => {
+        if (value['openInNewTab'] === true) {
+          this.router.navigate(['/blog', blogId]);
+        }
+      }
+    )
   }
 }

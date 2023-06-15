@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { CityService, TravelTip } from "src/app/service/CityService.service";
@@ -9,7 +9,12 @@ import { OverlayTipComponent } from "src/app/shared-components/overlay-tip/Overl
     templateUrl: "./TravelTipsPage.component.html",
     styleUrls: ["./TravelTipsPage.component.css"]
 })
-export class TravelTipsPageComponent {
+export class TravelTipsPageComponent implements OnChanges {
+    @Input() header: string = "Travel tips";
+    @Input() isViewAllEnabled: boolean = true;
+    @Input() hiddenBlogIds: number[] = [];
+
+    @Output() cardClicked = new EventEmitter<number>();
 
     travelTips: TravelTip[] = [];
     travelTipsCache = new Map<number, TravelTip>();
@@ -18,6 +23,8 @@ export class TravelTipsPageComponent {
     rectColors: string[] = ['#D8F7E6', '#FFEFE4', '#F7E8FF', '#E8F1FF', '#FBF1D9'];
     maxHeightInt: number = 0;
     maxHeightStr: string = null;
+
+    selectedPage: number = 1;
 
     constructor(
         public dialog: MatDialog,
@@ -30,13 +37,19 @@ export class TravelTipsPageComponent {
                     return;
                 }
                 this.travelTipsCache = result;
-                this.travelTips = Array.from(result.values());
+                this.travelTips = Array.from(result.values()).filter(travelTip => !this.hiddenBlogIds.includes(travelTip.tipId));
             }
         )
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+      this.travelTips = Array.from(this.travelTipsCache.values()).filter(travelTip => !this.hiddenBlogIds.includes(travelTip.tipId));
+      this.currentPage = 1;
+    }
+
     onPageChanged(pageNumber: number): void {
         this.currentPage = pageNumber;
+        console.log("ok");
     }
 
     getDisplayedItems(): TravelTip[] {
@@ -45,20 +58,7 @@ export class TravelTipsPageComponent {
     }
 
     onCardClicked(blogId: number): void {
-      const blog: TravelTip = this.travelTipsCache.get(blogId);
-      const dialogConfig: MatDialogConfig = {
-          maxHeight: '80vh',
-          maxWidth: '70vw',
-          data: {text: blog.text, isOpenInNewTab : true, blog: blog},
-        };
-      const dialogRef = this.dialog.open(OverlayTipComponent, dialogConfig);
-      dialogRef.afterClosed().subscribe(
-        (result: any) => {
-          if (!!result && result['openInNewTab'] === true) {
-            this.router.navigate(['blogs', blog.tipId]);
-          }
-        }
-      )
+      this.cardClicked.emit(blogId);
     }
 
     onViewAllClicked(): void {
