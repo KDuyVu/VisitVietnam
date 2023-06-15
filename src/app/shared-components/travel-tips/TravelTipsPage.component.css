@@ -1,85 +1,88 @@
 @font-face {
-    font-family: 'Parisienne';
-    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+  font-family: "Parisienne";
+  src: url("../../../assets/fonts/Parisienne/Parisienne-Regular.ttf");
 }
 
 :host {
-    width: 100%;
-    display: block;
+  width: 100%;
+  display: block;
 }
 
 .page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-family: "Parisienne";
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 1px;
+  font-style: normal;
+  font-size: 110px;
+  margin: unset;
+}
+
+.page-header button {
+  color: #3c8f7c;
+  background-color: #e8faf6;
+  border: 3px solid #e8faf6;
+  border-radius: 7px;
+}
+
+.page-header button:hover,
+.page-header button:focus {
+  color: #3c8f7c;
+  border-color: #cfeee7;
+}
+
+@media screen and (min-width: 800px) {
+  .page-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-header button {
+    position: absolute;
+    right: 1em;
+  }
+}
+
+.travel-tip-cards {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+}
+
+@media screen and (min-width: 1100px) {
+  .travel-tip-cards app-travel-tip-card {
+    width: calc((100% - 6em) / 3);
+  }
+
+  .travel-tip-cards app-travel-tip-card:not(:last-child) {
+    margin-right: 3em;
+  }
+}
+
+app-pagination {
+  padding-bottom: 10em;
+}
+
+@media screen and (max-width: 1100px) {
+  .travel-tip-cards {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1em;
-}
-
-h1 {
-    font-family: 'Parisienne';
-    font-weight: 400;
-    text-align: center;
-    letter-spacing: 1px;
-    font-style: normal;
-    font-size: 110px;
-    margin: unset;
-}
-
-.page-header button {
-    color: #3C8F7C;
-    background-color: #E8FAF6;
-    border: 3px solid #E8FAF6;
-    border-radius: 7px;
-}
-
-.page-header button:hover, .page-header button:focus {
-    color: #3C8F7C;
-    border-color: #CFEEE7;
-}
-
-@media screen and (min-width: 800px) {
-    .page-header {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .page-header button {
-        position: absolute;
-        right: 1em;
-    }
-}
-
-.travel-tip-cards {
-    display: flex;
+  }
+  .travel-tip-cards app-travel-tip-card {
     width: 100%;
-    align-items: flex-start;
-}
-
-@media screen and (min-width: 1100px) {
-    .travel-tip-cards app-travel-tip-card {
-        width: calc((100% - 6em) / 3);
-    }
-
-    .travel-tip-cards app-travel-tip-card:not(:last-child) {
-        margin-right: 3em;
-    }
-}
-
-app-pagination {
-    padding-bottom: 10em;
-}
-
-@media screen and (max-width: 1100px) {
-    .travel-tip-cards {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .travel-tip-cards app-travel-tip-card {
-        margin-right: 0px;
-    }
+    margin-right: 0px;
+    margin-top: 2em;
+  }
 }
