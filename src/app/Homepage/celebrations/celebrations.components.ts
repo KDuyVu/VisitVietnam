@@ -10,7 +10,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 })
 export class CelebrationsComponent {
   pictures = [
-    {
+    { 
       link: 'https://lp-cms-production.imgix.net/2023-01/Hanoi-Vietnam-Nicolas%20McComber-GettyImages-520741570-rfc.jpg?auto=format&w=1440&h=810&fit=crop&q=75',
       name: 'Tet (Luna New Year)',
       scale: 'NATIONWIDE',
