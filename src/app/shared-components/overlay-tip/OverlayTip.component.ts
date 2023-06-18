@@ -46,7 +46,6 @@ export class OverlayTipComponent implements OnInit {
     }
 
     openBlogInNewTab() {
-      console.log("open ",this.blog.tipId);
       this.dialogRef.close({openInNewTab: true});
     }
 }

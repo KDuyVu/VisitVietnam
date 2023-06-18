@@ -2,14 +2,7 @@
     display: flex;
     font-weight: bold;
     justify-content: center;
-}
-
-.app-wrapper app-tag {
-    margin-left: 2em;
-}
-
-.app-wrapper app-tag:last-child {
-    margin-right: 2em
+    flex-wrap: wrap;
 }
 
 .app-wrapper app-tag:hover {

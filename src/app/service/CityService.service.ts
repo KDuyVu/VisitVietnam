@@ -173,13 +173,13 @@ export class CityService {
             }
         )
 
-        const getCityExperienceUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('CityExperience', 'A', 'D', 7)}key=${this.apiKey}`;
+        const getCityExperienceUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('CityExperience', 'A', 'D', 386)}key=${this.apiKey}`;
 
         console.log("getting city experience");
         this.httpClient.get(getCityExperienceUrl).subscribe(
             (result: string) =>{
                 this.parseCityExperience(result);
-                console.log("done getting city experience");
+                console.log("done getting city experience ",result);
             }
         )
 

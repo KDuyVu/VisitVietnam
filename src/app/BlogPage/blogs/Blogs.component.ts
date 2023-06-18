@@ -17,11 +17,9 @@ export class BlogPostsComponent implements OnChanges {
   ];
 
   onCardClicked(blogId: number): void {
-    console.log("clicked?");
     this.cardClicked.emit(blogId);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.rows,' ',this.rectColors);
   }
 }

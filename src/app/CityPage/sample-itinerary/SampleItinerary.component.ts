@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { SampleItinerary } from "src/app/service/CityService.service";
 
 @Component({
@@ -6,15 +6,19 @@ import { SampleItinerary } from "src/app/service/CityService.service";
     templateUrl: "./SampleItinerary.component.html",
     styleUrls: ["./SampleItinerary.component.css"]
 })
-export class SampleItineraryComopnent implements OnChanges {
+export class SampleItineraryComopnent implements OnChanges, OnInit {
     @Input() displayedOrderToItin = new Map<number, SampleItinerary[]>();
 
     constructor(
         private cdr: ChangeDetectorRef
     ) { }
 
+    ngOnInit(): void {
+      const element = document.getElementById("day-items");
+
+    }
+
     ngOnChanges(changes: SimpleChanges): void {
-        console.log("changed ",this.displayedOrderToItin);
         this.cdr.detectChanges();
     }
 

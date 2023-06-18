@@ -37,7 +37,6 @@ export class BlogComponent implements OnInit {
       this.travelTips = Array.from(travelTipsCache.values());
       this.constructRows();
       this.travelTipsCache = travelTipsCache;
-      console.log('done');
       if (!!blogId) {
         setTimeout(() => this.displayBlogDialog(Number(blogId)), 10);
       }

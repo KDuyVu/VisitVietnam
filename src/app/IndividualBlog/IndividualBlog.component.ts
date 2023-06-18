@@ -33,7 +33,6 @@ export class IndividualBlogComponent implements OnInit {
       if (!params || !travelTipsCache) {
         return;
       }
-      console.log("called");
       const blogId = Number(params.get('blogId'));
       this.travelTipsCache = travelTipsCache;
       this.blog = this.travelTipsCache.get(blogId);

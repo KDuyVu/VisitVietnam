@@ -4,7 +4,7 @@
 
 * {
   margin: 0;
-  padding: 0; 
+  padding: 0;
   font-family: 'Poppins', sans-serif;
   color: #091133;
 }
@@ -12,13 +12,13 @@ p {
   font-family: 'Poppins', sans-serif;
 }
 
-nav{ 
+nav {
   display: flex;
   padding: 0% 6% 0% 6%;
   justify-content: space-between;
   align-items: center;
 }
-nav img { 
+nav img {
   width: 250px;
 }
 .nav-links {
@@ -82,21 +82,19 @@ nav img {
   transform: scaleX(1);
   transform-origin: left;
   }
-  
+
 /* header */
 
 .header {
-  min-height: 90vh;
   width: 100%;
   text-align: center;
 }
 
 .text-box {
-  display: inline-block;
+  display: block;
   text-align: left;
   width: 40%;
   margin: 5vh 0 0 3vw;
-  vertical-align: top;
 }
 .text-box h1 {
   font-family: 'Besley';
@@ -109,7 +107,6 @@ nav img {
   font-family: 'Parisienne';
   font-style: normal;
   font-weight: 400;
-  font-size: 160px;
   line-height: 85px;
   letter-spacing: 1px;
   padding-top: 50px;
@@ -133,17 +130,85 @@ nav img {
   width: 47%;
   vertical-align: top;
 }
+
 .header-pic img {
   width: 100%;
 }
 
 .div-wrapper {
-  position: absolute;
   width: 100%;
-  left: 0;
-  bottom: 0;
 }
 
 .div-wrapper img {
   width: 100%;
+}
+
+.text-box {
+  margin-bottom: 2em;
+}
+
+section.header {
+  position: relative;
+}
+
+.header-pic {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -100;
+}
+
+.header-pic {
+  bottom: 0;
+  right: 0;
+  z-index: -100;
+}
+
+@media screen and (max-width: 800px) {
+  nav {
+    padding: unset;
+  }
+
+  .header {
+    width: 100%;
+    min-height: unset;
+  }
+
+  .div-wrapper {
+    margin-top: 2em;
+    position: static;
+  }
+
+  .text-box {
+    width: 100%;
+    margin: unset;
+    padding-left: 1em;
+  }
+
+  .text-box .intro-text {
+    font-weight: 500;
+  }
+
+  #navLinks.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: unset;
+  }
+
+  #navLinks.nav-links ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #navLinks.nav-links ul li {
+    display: flex;
+    justify-content: right;
+    padding: unset;
+    margin-right: 10px
+  }
+
+  nav a.logo {
+    align-self: flex-start;
+    margin-top: 6%;
+  }
 }
