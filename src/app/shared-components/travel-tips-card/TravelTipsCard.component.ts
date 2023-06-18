@@ -30,7 +30,6 @@ export class TravelTipsCardComponent  {
     }
 
     openOverlayTip() {
-        console.log(this.isOpenInNewTab)
         const dialogConfig: MatDialogConfig = {
             maxHeight: '80vh',
             maxWidth: '70vw',

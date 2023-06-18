@@ -17,7 +17,6 @@
     display: flex;
     justify-content: center;
     padding-top: 1em;
-    font-size: 110px;
 }
 
 .iframe-wrapper {
@@ -35,7 +34,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 50%;
 }
 
 mat-expansion-panel {
@@ -48,7 +47,8 @@ mat-panel-title {
     font-family: 'Besley';
     font-style: normal;
     font-weight: 600;
-    font-size: 50px;
+    font-size: 35px;
+    color: #3C8F7C;
     line-height: 85px;
 }
 
@@ -56,7 +56,16 @@ mat-expansion-panel-header.mat-expansion-panel-header {
     height: auto;
 }
 
-.day-items {
+#body-wrapper * {
+  padding: unset
+}
+
+#body-wrapper li::before {
+  color: lightgrey;
+}
+
+#body-wrapper span {
+  color: black;
 }
 
 .day-items div {

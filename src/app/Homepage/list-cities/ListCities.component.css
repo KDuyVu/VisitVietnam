@@ -16,7 +16,6 @@ h1 {
   text-align: center;
   letter-spacing: 1px;
   font-style: normal;
-  font-size: 110px;
   margin: unset;
 }
 
@@ -109,4 +108,16 @@ app-city-card:not(:last-child) {
 button[nz-button] {
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+
+  .photo-item-div {
+    width: calc((100% - 1em) / 2);
+  }
+
+  app-city-card:not(:last-child) {
+    margin-right: 1em;
+    box-sizing: border-box;
+  }
 }

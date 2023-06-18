@@ -73,3 +73,10 @@ button[nz-button]:hover, button[nz-button]:focus {
 button[nz-button]:focus {
     color: black;
 }
+
+@media screen and (max-width: 800px) {
+  :host {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

@@ -1,63 +1,84 @@
 :host {
-    margin-bottom: 7em;
-    display: block;
-    margin-left: 3em;
-    margin-right: 3em;
-}
-app-info-banner {
-    margin-top: 1em;
-    margin-bottom: 1em;
+  margin-bottom: 7em;
+  display: block;
 }
 
-div.page-container-div {
-    height: 90%;
-    display: flex;
+app-info-banner {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.page-container-div {
+  display: flex;
 }
 
 .search-bar-wrapper {
-    width: 35%;
-    padding: 5em;
+  width: 35%;
+  padding: 1em;
 }
 
 app-search-bar {
-    width: 100%;
+  width: 100%;
 }
 
 div.map-div {
-    height: 100%;
-    width: 25%;
-    padding: 5px;
-    box-sizing: border-box;
+  height: 100%;
+  width: 50%;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 svg {
-    max-width: 100%;
-    transform: scale(1);
-    max-height: 100%;
+  max-width: 100%;
+  height: max-content;
+  max-height: 100vh;
 }
 
 path:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 path.active {
-    opacity: 0.5;
-    fill: #FF5757;
+  opacity: 0.5;
+  fill: #ff5757;
 }
 
 .map-div {
-    display: inline-flex;
+  display: inline-flex;
 }
 
 .city-card-wrapper {
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  padding-top: 3.5em;
+  padding-right: 3em;
+  height: max-content;
 }
 
 app-city-card {
+  width: 100%;
+  height: auto;
+}
+
+.map-card {
+  width: 65%;
+  display: flex;
+}
+
+@media screen and (max-width: 800px) {
+  .search-bar-wrapper {
     width: 100%;
-    height: auto;
+  }
+  .map-card {
+    width: 100%;
+  }
+  .page-container-div {
+    display: block;
+  }
+  .city-card-wrapper {
+    padding-right: 0;
+    padding-top:0;
+  }
 }

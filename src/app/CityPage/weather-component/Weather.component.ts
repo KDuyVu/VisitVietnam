@@ -19,30 +19,13 @@ export class WeatherComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("cahnged " ,this.city);
   }
 
   getA(): string {
     if (!this.city) {
       return null;
     }
-    console.log(`{
-      t: 'horizontal',
-      lang: 'en',
-      sl_lpl: 1,
-      ids: ['${this.city.weatherId}'],
-      font: 'Arial',
-      sl_ics: 'one_a',
-      sl_sot: 'fahrenheit',
-      cl_bkg: '#FFFFFF00',
-      cl_cloud: '#949494ff',
-      cl_persp: '#30b6f3ff',
-      cl_sun: '#FFC107FF',
-      cl_moon: '#FFC107FF',
-      cl_thund: '#FF5722',
-      cl_font: '#000000',
-      width: '30vw',
-    }`);
+
     return `{
       "t":"horizontal",
       "lang":"en",

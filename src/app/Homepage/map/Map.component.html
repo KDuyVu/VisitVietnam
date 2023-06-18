@@ -1,22 +1,24 @@
 <app-info-banner [text]="'Hover on the map or a city\'s name to quickly check it out'" [icon]="'check-circle'"> </app-info-banner>
 
 <div class="page-container-div">
-    <div class="search-bar-wrapper"> 
+    <div class="search-bar-wrapper">
         <app-search-bar (cityChanged)="onCityChanged($event)"> </app-search-bar>
     </div>
-    <div class="map-div">
-        <svg viewBox="0.9999892711639404 1.000034213066101 998.0000610351562 2096.599853515625">
-            <path
-                *ngFor="let entry of mapEntries"
-                [attr.d]="entry.cssVector"
-                [attr.title]="entry.cityName"
-                [attr.id]="entry.cityId"
-                (click)="onClick(entry, $event)"
-                [ngClass]="{'active': isSelected(entry)}"
-                [attr.fill]="getRegionColor(entry)"/>
-        </svg>
-    </div>
-    <div class="city-card-wrapper">
-        <app-city-card *ngIf="!!selectedCity" [city]="selectedCity" [allTagsSelected]="true"></app-city-card>
+    <div class="map-card">
+      <div class="map-div">
+          <svg viewBox="0.9999892711639404 1.000034213066101 998.0000610351562 2096.599853515625">
+              <path
+                  *ngFor="let entry of mapEntries"
+                  [attr.d]="entry.cssVector"
+                  [attr.title]="entry.cityName"
+                  [attr.id]="entry.cityId"
+                  (click)="onClick(entry, $event)"
+                  [ngClass]="{'active': isSelected(entry)}"
+                  [attr.fill]="getRegionColor(entry)"/>
+          </svg>
+      </div>
+      <div class="city-card-wrapper">
+          <app-city-card *ngIf="!!selectedCity" [city]="selectedCity" [allTagsSelected]="true"></app-city-card>
+      </div>
     </div>
 </div>

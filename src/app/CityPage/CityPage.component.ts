@@ -28,15 +28,15 @@ export class CityPageComponent implements OnInit{
 
     ngOnInit() {
         this.cityId = Number(this.route.snapshot.paramMap.get('id'));
-        console.log("id " ,this.cityId);
         combineLatest([this.route.paramMap, this.cityService.cityCacheDataSource$, this.cityService.cityExperienceCacheSource$])
             .subscribe(([params, cityCache, cityExperienceCache]) => {
                 if (!params || !cityCache || !cityExperienceCache) {
                     return;
                 }
                 this.city = cityCache.get(this.cityId);
-                this.cityExperiences = cityExperienceCache.get(this.cityId);
-                this.cityExperiences = cityExperienceCache.get(32);
+                console.log("cityId : ",this.cityId);
+                this.cityExperiences = Array.from(cityExperienceCache.values()).filter(experience => experience[0].cityId === this.cityId)[0];
+                console.log("cityId : ",this.cityExperiences);
             }
         );
 

@@ -49,7 +49,6 @@ export class TravelTipsPageComponent implements OnChanges {
 
     onPageChanged(pageNumber: number): void {
         this.currentPage = pageNumber;
-        console.log("ok");
     }
 
     getDisplayedItems(): TravelTip[] {

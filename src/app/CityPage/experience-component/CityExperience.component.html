@@ -2,14 +2,14 @@
     class="app-wrapper"
     *ngIf="!!cityExperiences"
 >
-    <div class="app-header">
+    <div class="app-header view-header">
         Experiences to try
     </div>
     <div class="item-row header">
         <div class="left"> Experience </div>
         <div class="right"> Potential Locations </div>
     </div>
-    <div 
+    <div
         class="item-row"
         *ngFor="let experience of cityExperiences"
     >

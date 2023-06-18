@@ -22,7 +22,6 @@ export class PaginationComponent implements OnChanges{
         this.maxPageNumber = Math.ceil(this.itemsSize / this.itemPerPage);
         for (let i = 1 ; i <= Math.min(this.numberOfPagesToChoose - 1, this.maxPageNumber - 1) ; i++) {
             this.currentPageNumbers.push(i);
-            console.log("opk ",this.currentPageNumbers);
         }
       }
       if (this.itemsSize > 0 && 'selectPage' in changes) {
@@ -60,7 +59,6 @@ export class PaginationComponent implements OnChanges{
     }
 
     private reconstructCurrentPageNumbes(): void {
-        console.log("redo ",this.currentPageNumbers);
         if (this.currentPageNumbers.length + 1 === this.maxPageNumber) {
             return;
         }
