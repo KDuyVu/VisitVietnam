@@ -1,80 +1,103 @@
- * {
+* {
   padding: 0;
   margin: 0;
   overflow: hidden;
- }
- .nationalCelebrations {
+}
+.nationalCelebrations {
   width: 100%;
   margin-top: 10vh;
   text-align: center;
- }
+}
 
- .nationalCelebrations h1 {
-  font-family: 'Parisienne';
+.nationalCelebrations h1 {
+  font-family: "Parisienne";
   font-style: normal;
   font-weight: 400;
- }
- .NC-contents {
-  padding: 40px;
-  margin-top: 20px;
-  font-family: 'Inter';
+}
+.NC-contents {
+  font-family: "Inter";
   width: 90vw;
   display: inline-block;
   text-align: center;
- }
+}
 
- .NC-contents-col {
+.NC-contents-col {
   width: 30%;
   display: inline-block;
   margin: 2% 1.5% 2% 1.5%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
- }
+}
 
- .NC-contents-pic {
+.NC-contents-pic {
   display: inline-block;
   width: 10vw;
-  height:7.5vw;
+  height: 7.5vw;
   margin: 5% 0 0 0;
   vertical-align: top;
   overflow: hidden;
- }
- .NC-contents-pic img{
+}
+.NC-contents-pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
- }
+}
 
- .NC-contents-infor {
+.NC-contents-infor {
   display: inline-block;
   width: 45%;
   text-align: left;
   text-align: left;
   vertical-align: top;
   margin: 5% 0 0 5%;
- }
+}
 
- .NC-contents-infor h3, p, span {
+.NC-contents-infor h3,
+p,
+span {
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
   line-height: 35px;
-  color: #231F20;
- }
- .NC-contents-infor h3 {
+  color: #231f20;
+}
+.NC-contents-infor h3 {
   font-weight: 600;
   font-size: 20px;
- }
+}
 
- .NC-contents-description {
+.NC-contents-description {
   display: inline-block;
   width: 90%;
   padding: 10px 0 10px 0;
- }
- .NC-contents-description p {
+}
+.NC-contents-description p {
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
   text-align: left;
-  color: #9E9DA2;
- }
+  color: #9e9da2;
+}
+
+@media screen and (max-width: 800px) {
+  .NC-contents-col {
+    width: 40%;
+  }
+
+  .NC-contents {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  .NC-contents-pic {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .NC-contents-infor {
+    width: 100%;
+    display: block;
+  }
+}

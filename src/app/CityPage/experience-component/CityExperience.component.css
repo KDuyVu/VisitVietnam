@@ -35,7 +35,7 @@
 }
 
 .item-row.header {
-  font-size: 35px;
+  font-size: 26px;
   color: white;
   text-align: center;
 }
@@ -50,7 +50,7 @@
 
 .item-row:not(.header) div {
   padding: 0.5em;
-  font-size: 23px;
+  font-size: 1em;
 }
 
 .item-row:not(.header) .left {
