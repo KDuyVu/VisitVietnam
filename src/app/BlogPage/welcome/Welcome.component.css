@@ -20,6 +20,7 @@
 
 .header-div {
   font-family: "Parisienne";
+  text-align: center;
 }
 
 .header-container .header-info {
@@ -37,9 +38,15 @@
   color: #FF5858;
 }
 
-@media(max-width: 1200px) {
+@media(max-width: 800px) {
+  .header-container {
+    padding-right: 0;
+  }
   .header-div {
       text-align: center;
       display: block;
+  }
+  .header-container {
+    height: auto;
   }
 }

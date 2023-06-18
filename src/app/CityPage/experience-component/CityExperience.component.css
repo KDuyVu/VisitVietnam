@@ -1,61 +1,60 @@
 @font-face {
-    font-family: 'Parisienne';
-    src: url('../../../assets/fonts/Parisienne/Parisienne-Regular.ttf');
+  font-family: "Parisienne";
+  src: url("../../../assets/fonts/Parisienne/Parisienne-Regular.ttf");
 }
 
 .app-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .app-header {
-    font-family: 'Parisienne';
-    display: flex;
-    justify-content: center;
+  font-family: "Parisienne";
+  text-align: center;
 }
 
 .item-row {
-    display: flex;
-    justify-content: center;
-    margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
 }
 
-.item-row .left, .item-row .right{
-    width: 50%;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
-    font-weight: 400;
+.item-row .left,
+.item-row .right {
+  width: 50%;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  font-weight: 400;
 }
-
 
 .item-row .left {
-    margin-right: 4px;
+  margin-right: 4px;
 }
 
 .item-row .right {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 
 .item-row.header {
-    font-size: 35px;
-    color: white;
-    text-align: center;
+  font-size: 35px;
+  color: white;
+  text-align: center;
 }
 
 .item-row.header .left {
-    background-color: #00C2CB;
+  background-color: #00c2cb;
 }
 
 .item-row.header .right {
-    background-color: #FF5757;
+  background-color: #ff5757;
 }
 
 .item-row:not(.header) div {
-    padding: 0.5em;
-    font-size: 23px;
+  padding: 0.5em;
+  font-size: 23px;
 }
 
 .item-row:not(.header) .left {
-    background-color: #BDFAFD;
+  background-color: #bdfafd;
 }
 
 .item-row:not(.header) .right {

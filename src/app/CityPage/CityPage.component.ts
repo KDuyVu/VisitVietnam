@@ -13,8 +13,7 @@ export class CityPageComponent implements OnInit{
     cityId: number = null;
     city: City = null;
     cityExperiences: CityExperience[] = null;
-    itineraries: SampleItinerary[] = null;
-    displayedOrderToItin = new Map<number, SampleItinerary[]>();
+    itineraries: SampleItinerary[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -34,28 +33,13 @@ export class CityPageComponent implements OnInit{
                     return;
                 }
                 this.city = cityCache.get(this.cityId);
-                console.log("cityId : ",this.cityId);
                 this.cityExperiences = Array.from(cityExperienceCache.values()).filter(experience => experience[0].cityId === this.cityId)[0];
-                console.log("cityId : ",this.cityExperiences);
             }
         );
 
         this.cityService.getItinerariesByCityId(this.cityId).subscribe(
             (itineraries) => {
                 this.itineraries = itineraries;
-                this.processItineraries();
-            }
-        )
-    }
-
-    private processItineraries(): void {
-        this.displayedOrderToItin = new Map<number, SampleItinerary[]>();
-        this.itineraries.forEach(
-            (item) => {
-                if (!this.displayedOrderToItin.has(item.displayedOrder)) {
-                    this.displayedOrderToItin.set(item.displayedOrder, []);
-                }
-                this.displayedOrderToItin.get(item.displayedOrder).push(item);
             }
         )
     }
