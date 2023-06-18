@@ -9,5 +9,5 @@ import { City, CityExperience } from "src/app/service/CityService.service";
 export class CityExperienceComponent {
     @Input() cityExperiences: CityExperience[] = null;
 
-    constructor() { console.log("ex : ",this.cityExperiences) }
+    constructor() { }
 }

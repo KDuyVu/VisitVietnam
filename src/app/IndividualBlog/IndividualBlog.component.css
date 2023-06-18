@@ -7,7 +7,24 @@
   padding: 50px;
   padding-top: 100px;
 }
+
 .view-more-div {
   padding-left :50px;
   padding-right :50px;
+}
+
+app-shared-header {
+  margin-bottom: 200px;
+}
+
+@media screen and (max-width: 800px) {
+  #html-wrapper {
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+
+  .view-more-div {
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
 }

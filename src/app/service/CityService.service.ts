@@ -59,10 +59,8 @@ export interface CityExperience {
 export interface SampleItinerary {
     id: number,
     cityId: number,
-    day: number,
-    actions: string[],
-    header: string,
-    displayedOrder: number,
+    itineraryType: string,
+    HTML: string,
 }
 
 @Injectable({
@@ -183,7 +181,7 @@ export class CityService {
             }
         )
 
-        const getSampleItiernariesUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Itineraries', 'A', 'F', 560)}key=${this.apiKey}`;
+        const getSampleItiernariesUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('NewItineraries', 'A', 'F', 252)}key=${this.apiKey}`;
 
         console.log("getting sample initeraries");
         this.httpClient.get(getSampleItiernariesUrl).subscribe(
@@ -372,10 +370,8 @@ export class CityService {
             const data: SampleItinerary = {
                 id: Number(rawData[0]),
                 cityId: Number(rawData[1]),
-                day: Number(rawData[2]),
-                actions: String(rawData[3]).split('. '),
-                header: rawData[4],
-                displayedOrder: Number(rawData[5]),
+                itineraryType: rawData[2],
+                HTML: rawData[3],
             }
             datas.push(data);
         }

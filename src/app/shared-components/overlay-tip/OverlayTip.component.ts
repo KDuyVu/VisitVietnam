@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, O
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Route, Router } from "@angular/router";
 import { TravelTip } from "src/app/service/CityService.service";
+import { processHTML } from "src/app/service/Functions";
 
 export interface DialogData {
     text: string,
@@ -32,12 +33,7 @@ export class OverlayTipComponent implements OnInit {
 
     ngOnInit(): void {
         const element = document.getElementById('html-wrapper');
-        this.content = this.content.replace(/<body([^>]*)>/i, '<div class="body-wrapper"><body$1>');
-        this.content = this.content.replace(/<\/body>/i, '</body></div>');
-        this.content = this.content.replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g, (match, p1, p2, p3) => {
-          const modifiedRules = p2.replace(/(^|\})([^{]+)(\{)/g, '$1.body-wrapper $2$3');
-          return `${p1}${modifiedRules}${p3}`;
-        });
+        this.content = processHTML(this.content);
         element.innerHTML = this.content;
     }
 

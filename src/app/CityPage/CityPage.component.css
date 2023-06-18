@@ -8,3 +8,9 @@
 .component-wrapper * {
     width: 70%;
 }
+
+@media screen and (max-width: 800px) {
+  .component-wrapper * {
+    width: 100%;
+  }
+}
