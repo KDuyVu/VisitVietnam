@@ -63,6 +63,14 @@ export interface SampleItinerary {
     HTML: string,
 }
 
+export interface Slider {
+  cityName?: string,
+  cityId?: number,
+  flickrLink?: string,
+  copyright?: string,
+  description?: string
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -70,9 +78,11 @@ export class CityService {
     private cityDataSource = new BehaviorSubject<Array<City>>(null);
     private cityCacheDataSource = new BehaviorSubject<Map<number, City>>(null);
     private tagDataSource = new BehaviorSubject<Array<Tag>>(null);
+    private sliderDataSource = new BehaviorSubject<Array<Slider>>(null);
     private regionDataSource = new BehaviorSubject<Array<Region>>(null);
     private photoDataSource = new BehaviorSubject<Array<Photo>>(null);
     private tagCacheDataSource = new BehaviorSubject<Map<number, Tag>>(null);
+    private sliderCacheDataSource = new BehaviorSubject<Map<number, Slider>>(null);
     private regionCacheDataSource = new BehaviorSubject<Map<number, Region>>(null);
     private photoCacheDataSource = new BehaviorSubject<Map<number, Photo>>(null);
     private mapEntryDataSource = new BehaviorSubject<MapEntry[]>(null);
@@ -84,6 +94,7 @@ export class CityService {
     cityDataSource$ = this.cityDataSource.asObservable();
     cityCacheDataSource$ = this.cityCacheDataSource.asObservable();
     tagDataSource$ = this.tagDataSource.asObservable();
+    sliderDataSource$ = this.sliderDataSource.asObservable();
     regionDataSource$ = this.regionDataSource.asObservable();
     photoDataSource$ = this.photoDataSource.asObservable();
     travelTipsDataSource$ = this.travelTipsSource.asObservable();
@@ -97,6 +108,7 @@ export class CityService {
     itinerariesByCityId$ = this.itinerariesByCityId.asObservable();
 
     private tagCache = new Map<number, Tag>();
+    private sliderCache = new Map<number, Slider>();
     private regionCache = new Map<number, Region>();
     private photoCache = new Map<number, Photo>();
     private cityCache = new Map<number, City>();
@@ -111,6 +123,17 @@ export class CityService {
     constructor(
         private httpClient: HttpClient
     ) {
+        //Harry's part
+        const getSlidersURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Slider', 'A', 'E', 63)}key=${this.apiKey}`;
+
+        console.log("getting sliders");
+        this.httpClient.get(getSlidersURL).subscribe(
+          (result: string) =>{
+              this.parseSlider(result);
+              console.log("done getting sliders");
+          }
+        )
+        //
         const getRegionsURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Region', 'A', 'E', 8)}key=${this.apiKey}`;
 
         console.log("getting regions");
@@ -238,7 +261,28 @@ export class CityService {
         this.cityCacheDataSource.next(this.cityCache);
         return cities;
     }
-
+    //Harry's part
+    private parseSlider(returnValues: Object): Slider[] {
+      const valueRanges: Object[] = returnValues['valueRanges'];
+      const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+      const sliders = new Array<Slider>();
+      for (let i = 0 ; i < values.length ; i++) {
+          const rawSlider: string[] = values[i];
+          const slider: Slider = {
+              cityName: rawSlider[0],
+              cityId: Number(rawSlider[1]),
+              flickrLink: rawSlider[2],
+              copyright: rawSlider[3],
+              description: rawSlider[4],
+          }
+          sliders.push(slider);
+          this.sliderCache.set(slider.cityId, slider);
+      }
+      this.sliderDataSource.next(sliders);
+      this.sliderCacheDataSource.next(this.sliderCache);
+      return sliders;
+    }
+    //
     private parseRegion(returnValues: Object): Region[] {
         const valueRanges: Object[] = returnValues['valueRanges'];
         const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
