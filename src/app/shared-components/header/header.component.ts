@@ -8,5 +8,13 @@ import { CityService } from "src/app/service/CityService.service";
   styleUrls: ['./header.component.css']
 })
 export class SharedHeaderComponent {
-  //your code goes here
+  menuVisible: boolean = false;
+
+  showMenu() {
+    this.menuVisible = true;
+  }
+
+  hideMenu() {
+    this.menuVisible = false;
+  }
 }
