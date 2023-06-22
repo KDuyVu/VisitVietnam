@@ -71,6 +71,15 @@ export interface Slider {
   description?: string
 }
 
+export interface Holiday {
+  id?: number,
+  name?: string,
+  vnTranslation?: string,
+  date?: string,
+  significance?: string,
+  photoUrl?: string,
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -90,6 +99,7 @@ export class CityService {
     private travelTipsCacheSource = new BehaviorSubject<Map<number, TravelTip>>(null);
     private cityExperienceCacheSource = new BehaviorSubject<Map<number, CityExperience[]>>(null);
     private itinerariesByCityId = new BehaviorSubject<Map<number, SampleItinerary[]>>(null);
+    private holidaysDataSource = new BehaviorSubject<Holiday[]>(null);
 
     cityDataSource$ = this.cityDataSource.asObservable();
     cityCacheDataSource$ = this.cityCacheDataSource.asObservable();
@@ -98,6 +108,7 @@ export class CityService {
     regionDataSource$ = this.regionDataSource.asObservable();
     photoDataSource$ = this.photoDataSource.asObservable();
     travelTipsDataSource$ = this.travelTipsSource.asObservable();
+    holidaysDataSource$ = this.holidaysDataSource.asObservable();
 
     tagCacheDataSource$ = this.tagCacheDataSource.asObservable();
     regionCacheDataSource$ = this.regionCacheDataSource.asObservable();
@@ -213,6 +224,16 @@ export class CityService {
                 console.log("done getting sample initeraries");
             }
         )
+
+        const getHolidaysUrl= `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Holidays', 'A', 'E', 12)}key=${this.apiKey}`;
+
+        console.log("getting holidays");
+        this.httpClient.get(getHolidaysUrl).subscribe(
+            (result: string) =>{
+                this.parseHolidays(result);
+                console.log("done getting holidays");
+            }
+        )
     }
 
     getCityExperienceById(cityId: number): Observable<CityExperience[]> {
@@ -249,8 +270,8 @@ export class CityService {
                 regionId: Number(rawCity[4]),
                 photoIds: rawCity[11].split(',').map(Number),
                 tagIds: rawCity[16].split(',').map(Number),
-                provinceLogo: this.transformToViewablUrl(rawCity[29]),
-                thumbNail: this.transformToViewablUrl(rawCity[31]),
+                provinceLogo: this.transformToViewableUrl(rawCity[29]),
+                thumbNail: this.transformToViewableUrl(rawCity[31]),
                 weatherId: rawCity[32],
             }
             cities.push(city);
@@ -330,7 +351,7 @@ export class CityService {
         for (let i = 0 ; i < values.length ; i++) {
             const rawPhoto: string[] = values[i];
             const photo: Photo = {
-                photoUrl: this.transformToViewablUrl(rawPhoto[0]),
+                photoUrl: this.transformToViewableUrl(rawPhoto[0]),
                 photoId: Number(rawPhoto[1]),
             }
             this.photoCache.set(photo.photoId, photo);
@@ -430,7 +451,26 @@ export class CityService {
 
     }
 
-    private transformToViewablUrl(driveUrl: string): string {
+    private parseHolidays(returnValues): void {
+        const valueRanges: Object[] = returnValues['valueRanges'];
+        const values: Array<Array<string>> = valueRanges.map(obj => obj['values'][0]);
+        const datas = new Array<Holiday>();
+        for (let i = 0 ; i < values.length ; i++) {
+            const rawData: string[] = values[i];
+            const data: Holiday = {
+                name: rawData[0],
+                vnTranslation: rawData[1],
+                date: rawData[2],
+                significance: rawData[3],
+                photoUrl: this.transformToViewableUrl(rawData[4]),
+            }
+            datas.push(data);
+        }
+
+        this.holidaysDataSource.next(datas);
+    }
+
+    private transformToViewableUrl(driveUrl: string): string {
         const match = driveUrl.match(/d\/(.*?)\//);
         if (match) {
             return `https://drive.google.com/uc?export=view&id=${match[1]}`;
