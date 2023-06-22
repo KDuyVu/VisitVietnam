@@ -30,7 +30,7 @@ import { AppComponent } from './app.component';
 import { PaginationComponent } from './shared-components/pagination/Pagination.component';
 import { FooterComponent } from './shared-components/footer/footer.component';
 import { HeaderComponent } from './Homepage/header/header.component';
-import { CelebrationsComponent } from './Homepage/celebrations/celebrations.components';
+import { CelebrationsComponent } from './Homepage/celebrations/Celebrations.components';
 import { SharedHeaderComponent } from './shared-components/header/header.component';
 
 import { NzCardModule } from 'ng-zorro-antd/card';
