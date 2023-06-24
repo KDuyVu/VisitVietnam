@@ -6,19 +6,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Slider } from '../service/CityService.service';
 
-
-interface Slider {
-  cityName?: string,
-  cityId?: number,
-  flickrLink?: string,
-  copyright?: string,
-  description?: string
-}
-
-interface Image extends Slider {
-  src: string;
-  alt: string;
+interface Image {
+  cityName: string,
+  cityId: number,
+  flickrLink: string,
+  copyright: string,
+  description: string,
+  html: string
 }
 
 @Component({
@@ -28,122 +24,7 @@ interface Image extends Slider {
 })
 
 export class SliderComponent implements OnInit {
-  images: Image[] = [
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    },
-    {
-      src: "https://media.timeout.com/images/105241469/1920/1080/image.jpg",
-      alt: "Image 1"
-    },
-    {
-      src:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/VietnamOMC.png",
-      alt: "Image 2"
-    },
-    {
-      src: "https://i.ibb.co/xsggWMH/image.png",
-      alt: "Image 3"
-    }
-
-  ];
+  images: Image[] = [];
   currentChangeImageIndex = 0;
 
   changeImage(direction: number) {
@@ -153,8 +34,10 @@ export class SliderComponent implements OnInit {
   }
 
   // divCount: number[] = Array.from({ length: 10 });
+  temp = 0;
   currentSlideShowIndex = 0;
   changeSlideShow(direction: number) {
+    console.log(++this.temp);
     const VisibleImages = 15;
     const length = this.images.length;
     this.currentSlideShowIndex += direction;
@@ -164,33 +47,52 @@ export class SliderComponent implements OnInit {
       this.currentSlideShowIndex = 0;
     } else if (this.currentSlideShowIndex < 0) {
       this.currentSlideShowIndex = length - VisibleImages;
-    }
+    } 
 
     const slideshowElement = document.querySelector('.slides-show-container') as HTMLElement;
     slideshowElement.style.transform = `translateX(-${this.currentSlideShowIndex * 200}px)`;
   }
+  changeImageByIndex(index: number) {
+    this.currentChangeImageIndex = index;
+  }
 
-
-  constructor() { }
+  constructor(private cityService: CityService) { }
+  sliders: Slider[];
 
   ngOnInit() {
-    this.pullSliderData();
+    this.cityService.sliderDataSource$.subscribe(
+      ((value: Slider[]) => {
+        if(value != null) {
+          this.sliders = value;
+          this.pullSliderData();
+        }
+      })
+    )
   }
 
   pullSliderData() {
-    this.images.forEach(image => {
-      const cityName = image.cityName;
-      const cityId = image.cityId;
-      const flickrLink = image.flickrLink;
-      const copyright = image.copyright;
-      const description = image.description;
+    const allSliderData: Slider[] = [...this.sliders];
+    console.log('All slider data:', allSliderData[0].html);
 
-      // Do something with the data (e.g., log it or pass it to another function)
-      console.log(`City Name: ${cityName}`);
-      console.log(`City ID: ${cityId}`);
-      console.log(`Flickr Link: ${flickrLink}`);
-      console.log(`Copyright: ${copyright}`);
-      console.log(`Description: ${description}`);
+    this.images = allSliderData.map(item => {
+      const srcLink = this.getSrcLink(item.html);
+      return {
+        cityName: item.cityName,
+        cityId: item.cityId,
+        flickrLink: item.flickrLink,
+        copyright: item.copyright,
+        description: item.description,
+        html: item.html,
+        src: srcLink,
+        alt: item.cityName
+      };
     });
   }
+
+  private getSrcLink(html: string): string {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const imgElement = doc.querySelector('img');
+    return imgElement ? imgElement.getAttribute('src') : '';
+  }
 }
+

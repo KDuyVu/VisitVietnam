@@ -1,0 +1,152 @@
+* {
+  font-family: 'Inter';
+}
+.intro {
+  width: 100vw;
+  text-align: center;
+  height: 90vh;
+}
+
+.intro h1 {
+  text-align: left;
+  font-family: 'Parisienne';
+  font-weight: 400;
+  font-size: 110px;
+  line-height: 85px;
+  letter-spacing: 1px;
+  color: #091133;
+  padding: 15vh 0 5vh 10vw;
+}
+
+.intro p {
+  text-align: left;
+  font-family: 'Besley';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 85px;
+  letter-spacing: 1px;
+  color: #091133;
+  padding: 0 0 10vh 10vw;
+}
+
+.lanterns {
+  position: relative;
+  display: inline-block;
+  width: 10vw;
+  height: 15vw;
+}
+.lanterns img {
+  width: 100%;
+}
+
+#lanterns-pink {
+  position: absolute;
+  top: 3vw;
+  left: 0;
+}
+.tapestry-of-talents {
+  width: 100%;
+  text-align: center;
+  background-color: f1f1f1;
+  padding: 15vh 0 15vh 0;
+}
+.tapestry-of-talents p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 30px;
+  color: #667085;
+}
+.tapestry-of-talents h2 {
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+  color: #101828;
+}
+.tapestry-of-talents h4 {
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 30px;
+  color: #101828;
+}
+.tapestry-of-talents img {
+  width: 80%;
+  padding: 10vh 0 10vh 0;
+}
+#tapestry-links {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #7F56D9;
+}
+
+/* comments */
+.comments {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  margin: 10vh 0 10vh 0;
+}
+.comments h2 {
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+  color: #101828;
+  margin: 2vh 0 5vh 0;
+}
+.comments-col {
+  display: inline-block;
+  width: 20%;
+  margin: 0 1.5% 0 1.5%;
+  overflow: hidden;
+}
+.comments-col img {
+  width: 25vh;
+  height: 25vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.text-box {
+  width: 70%;
+  text-align: left;
+  padding: 2%;
+}
+.text-box h5 {
+  font-size: 25px;
+}
+.text-box p {
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+#Duy-comment img {
+  float: left;
+  margin: 2vh 0 0 2vh;
+}
+#Duy-comment .text-box {
+  float: right;
+  margin: 10% 5% 0 0;
+}
+
+#Sinh-comment img {
+  float: right;
+  margin: 0 2vh 2vh 0;
+}
+#Sinh-comment .text-box {
+  float: left;
+  margin: 10% 0 0 5%;
+}
+
+#Hung-comment img {
+  float: right;
+  margin: 2vh 2vh 0 0 ;
+}
+#Hung-comment .text-box {
+  float: left;
+  margin: 10% 0 0 5%;
+}

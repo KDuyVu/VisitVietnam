@@ -53,6 +53,7 @@ import { BlogWelcomeComponent } from './BlogPage/welcome/Welcome.component';
 import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.component';
 import { SliderComponent } from './slider/slider.component';
 import { IntroComponent } from './Homepage/intro/intro.component';
+import { AboutUsComponent } from './AboutUsPage/aboutUs.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { IntroComponent } from './Homepage/intro/intro.component';
     FooterComponent,
     SliderComponent,
     SharedHeaderComponent,
-    IntroComponent
+    IntroComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
