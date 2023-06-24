@@ -68,7 +68,8 @@ export interface Slider {
   cityId?: number,
   flickrLink?: string,
   copyright?: string,
-  description?: string
+  description?: string,
+  html?: string
 }
 
 export interface Holiday {
@@ -135,7 +136,7 @@ export class CityService {
         private httpClient: HttpClient
     ) {
         //Harry's part
-        const getSlidersURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Slider', 'A', 'E', 63)}key=${this.apiKey}`;
+        const getSlidersURL = `${this.baseUrl}/${this.spreadsheetId}/values:batchGet?${this.constructRanges('Slider', 'A', 'F', 63)}key=${this.apiKey}`;
 
         console.log("getting sliders");
         this.httpClient.get(getSlidersURL).subscribe(
@@ -295,6 +296,7 @@ export class CityService {
               flickrLink: rawSlider[2],
               copyright: rawSlider[3],
               description: rawSlider[4],
+              html: rawSlider[5]
           }
           sliders.push(slider);
           this.sliderCache.set(slider.cityId, slider);

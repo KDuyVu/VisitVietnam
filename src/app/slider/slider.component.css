@@ -1,6 +1,7 @@
 .slider{
   width: 100vw;
   text-align: center;
+  margin-top: 10vh;
 }
 .slider h1 {
   font-family: 'Parisienne';
@@ -45,6 +46,11 @@
   float: left;
 }
 
+.slides-pic img{
+  height: 100%;
+  border-radius: 30px;
+}
+
 .slides-pic {
   display: none;
   height: 100%;
@@ -52,19 +58,31 @@
   transition: opacity 0.5s ease;
   border-radius: 30px;
 }
-.slides-pic img{
-  height: 100%;
-  border-radius: 30px;
-}
 
 .slides-pic.active {
   display: block;
   opacity: 1;
+  animation: slide-in-zoom 0.5s ease;
+}
+
+@keyframes slide-in-zoom {
+  from {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 
 
 /* slide show */
 
+.mini-slideShow {
+  width: 100%;
+  padding: 3vh 0 15vh 0;
+}
 
 .slide-show {
   display: inline-block;
@@ -80,6 +98,7 @@
 
 .slides-show-div {
   height: 10vh; /* Adjust the spacing between slides as per your requirement */
+  cursor: pointer;
 }
 
 .slides-show-div img {
