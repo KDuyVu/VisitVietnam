@@ -5,39 +5,26 @@
 
 <div #photoContainerStart class="photo-container-wrapper">
   <div class="photo-container-div">
-    <div
-      *ngFor="let row of getFirstNthRowOfCities(showedRow)"
-      class="photo-row-div"
-    >
-      <app-city-card
-        *ngFor="let city of row"
-        [city]="city"
-        class="photo-item-div"
-        [selectedTagIds]="selectedTagIds"
-      >
+    <div *ngIf="getFirstNthRowOfCities(showedRow).length === 0" class="no-content">
+      <img src="../../../assets/Photos/3_Conical_Hat.png">
+      <h1> NO CITY MATCHES </h1>
+    </div>
+    <div *ngFor="let row of getFirstNthRowOfCities(showedRow)" class="photo-row-div">
+      <app-city-card *ngFor="let city of row" [city]="city" class="photo-item-div" [selectedTagIds]="selectedTagIds">
       </app-city-card>
     </div>
   </div>
 </div>
 
-<div class="show-more-wrapper">
-  <button
-    nz-button
-    nzType="default"
-    (click)="onShowAllButtonClicked()"
-    [disabled]="isShowAllButtonDisabled()"
-  >
+<div class="show-more-wrapper" *ngIf="getFirstNthRowOfCities(showedRow).length !== 0">
+  <button nz-button nzType="default" (click)="onShowAllButtonClicked()" [disabled]="isShowAllButtonDisabled()">
     <div class="button-div">
       <div>Show all</div>
       <span><mat-icon inline> expand_more </mat-icon> </span>
     </div>
   </button>
-  <button
-    nz-button
-    nzType="default"
-    (click)="onCollapseAllButtonClicked(photoContainerStart)"
-    [disabled]="isCollapseAllButtonDisabled()"
-  >
+  <button nz-button nzType="default" (click)="onCollapseAllButtonClicked(photoContainerStart)"
+    [disabled]="isCollapseAllButtonDisabled()">
     <div class="button-div">
       <div>Show less</div>
       <span><mat-icon inline> expand_less </mat-icon> </span>

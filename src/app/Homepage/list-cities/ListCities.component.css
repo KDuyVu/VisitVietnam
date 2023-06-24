@@ -110,8 +110,24 @@ button[nz-button] {
   align-items: center;
 }
 
-@media screen and (max-width: 800px) {
+div.no-content {
+  display: flex;
+  flex-direction: column;
+}
 
+div.no-content h1 {
+  font: unset;
+  font-weight: 500;
+}
+
+img {
+  align-self: center;
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+@media screen and (max-width: 800px) {
   .photo-item-div {
     width: calc((100% - 1em) / 2);
   }
