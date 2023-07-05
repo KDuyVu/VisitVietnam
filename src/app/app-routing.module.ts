@@ -5,12 +5,14 @@ import { BlogComponent } from './BlogPage/Blog.component';
 import { CityPageComponent } from './CityPage/CityPage.component';
 import { HomepageComponent } from './Homepage/Homepage.component';
 import { IndividualBlogComponent } from './IndividualBlog/IndividualBlog.component';
+import { AboutUsComponent } from './AboutUsPage/aboutUs.component';
 
 const appRoutes: Routes = [
   { path: 'homepage', component: HomepageComponent },
   { path: 'city/:id', component: CityPageComponent },
   { path: 'blogs', component: BlogComponent},
   { path: 'blog/:blogId', component: IndividualBlogComponent },
+  { path: 'aboutUs', component: AboutUsComponent},
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   { path: '**', redirectTo: '/homepage'}
 ];

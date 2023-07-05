@@ -40,3 +40,9 @@ body {
     font-size: 50px;
   }
 }
+
+.flickr-embed-photo img {
+  width:1000px !important;
+  aspect-ratio: unset !important;
+  max-width: unset !important;
+}
