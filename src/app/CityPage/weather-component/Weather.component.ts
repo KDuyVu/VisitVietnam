@@ -16,7 +16,7 @@ export class WeatherComponent implements OnChanges {
       'https://app1.weatherwidget.org/js/?id=ww_757c2bc9d43ee';
     this.myScriptElement.async = true;
     document.body.appendChild(this.myScriptElement);
-  }
+  } 
 
   ngOnChanges(changes: SimpleChanges): void {
   }

@@ -1,152 +1,173 @@
 * {
   font-family: 'Inter';
 }
+#get-bold {
+  font-weight: 2000;
+}
 .intro {
-  width: 100vw;
+  width: 100%;
   text-align: center;
-  height: 90vh;
 }
-
 .intro h1 {
-  text-align: left;
   font-family: 'Parisienne';
+  font-style: normal;
   font-weight: 400;
-  font-size: 110px;
+  font-size: 6.5vw;
+  line-height: 94%;
+  text-align: center;
+  letter-spacing: 1px;
+  color: #091133;
+  padding: 10vh 0 5vh 0;
+}
+.intro img {
+  width: 65%;
+}
+
+/* our team introduction */
+.ourTeamIntro {
+  width: 100%;
+  text-align: center;
+  margin: 10vh 0 0 0;
+}
+.member-intro {
+  display: inline-block;
+  width: 40%;
+  padding: 0 5% 5% 5%;
+}
+.member-intro img {
+  width: 100%;
+}
+
+/* founder-letter */
+.founder-letter {
+  width: 90vw;
+  margin: 10vh 0 10vh 5vw;
+  text-align: center;
+  overflow: hidden;
+}
+.founder-comment-div {
+  display: inline-block;
+  width: 85%;
+  text-align: left;
+  overflow: hidden;
+  vertical-align: top;
+}
+.founder-comment-div h3 {
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
   line-height: 85px;
   letter-spacing: 1px;
   color: #091133;
-  padding: 15vh 0 5vh 10vw;
 }
-
-.intro p {
-  text-align: left;
-  font-family: 'Besley';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 85px;
-  letter-spacing: 1px;
-  color: #091133;
-  padding: 0 0 10vh 10vw;
-}
-
-.lanterns {
-  position: relative;
-  display: inline-block;
-  width: 10vw;
-  height: 15vw;
-}
-.lanterns img {
-  width: 100%;
-}
-
-#lanterns-pink {
-  position: absolute;
-  top: 3vw;
-  left: 0;
-}
-.tapestry-of-talents {
-  width: 100%;
-  text-align: center;
-  background-color: f1f1f1;
-  padding: 15vh 0 15vh 0;
-}
-.tapestry-of-talents p {
+.founder-comment-div p {
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 30px;
-  color: #667085;
-}
-.tapestry-of-talents h2 {
-  font-weight: 600;
-  font-size: 52px;
-  line-height: 60px;
-  letter-spacing: -0.02em;
-  color: #101828;
-}
-.tapestry-of-talents h4 {
-  font-weight: 500;
-  font-size: 34px;
-  line-height: 30px;
-  color: #101828;
-}
-.tapestry-of-talents img {
-  width: 80%;
-  padding: 10vh 0 10vh 0;
-}
-#tapestry-links {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #7F56D9;
-}
-
-/* comments */
-.comments {
-  width: 100%;
-  text-align: center;
-  overflow: hidden;
-  margin: 10vh 0 10vh 0;
-}
-.comments h2 {
-  font-weight: 600;
-  font-size: 52px;
-  line-height: 60px;
-  letter-spacing: -0.02em;
-  color: #101828;
-  margin: 2vh 0 5vh 0;
-}
-.comments-col {
-  display: inline-block;
-  width: 20%;
-  margin: 0 1.5% 0 1.5%;
-  overflow: hidden;
-}
-.comments-col img {
-  width: 25vh;
-  height: 25vh;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.text-box {
-  width: 70%;
-  text-align: left;
-  padding: 2%;
-}
-.text-box h5 {
-  font-size: 25px;
-}
-.text-box p {
   font-size: 17px;
-  line-height: 20px;
-  font-weight: 400;
+  line-height: 40px;
   letter-spacing: 1px;
-  opacity: 0.6;
-}
-#Duy-comment img {
-  float: left;
-  margin: 2vh 0 0 2vh;
-}
-#Duy-comment .text-box {
-  float: right;
-  margin: 10% 5% 0 0;
+  color: #091133;
 }
 
-#Sinh-comment img {
-  float: right;
-  margin: 0 2vh 2vh 0;
+.founder-pics-div {
+  display: inline-block;
+  width: 15%;
+  overflow: hidden;
 }
-#Sinh-comment .text-box {
-  float: left;
-  margin: 10% 0 0 5%;
+.founder-pics-div img {
+  width: 100%;
 }
 
-#Hung-comment img {
-  float: right;
-  margin: 2vh 2vh 0 0 ;
+/* wave pic */
+.wavePic {
+  width: 100%;
+  padding: 0 0 10vh 0;
 }
-#Hung-comment .text-box {
-  float: left;
-  margin: 10% 0 0 5%;
+.wavePic img {
+  width: 100%;
+}
+
+/* Join our team */
+
+.join-our-team {
+  width: 90vw;
+  margin: 0 0 15vh 5vw;
+  text-align: center;
+}
+.JOT-pic {
+  display: inline-block;
+  width: 25%;
+  vertical-align: top;
+  padding: 15vh 5% 0 0;
+}
+.JOT-pic img {
+  width: 100%;
+}
+.JOT-comment-div {
+  display: inline-block;
+  width:70%;
+  text-align: left;
+}
+.JOT-comment-div h3 {
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 85px;
+  letter-spacing: 1px;
+  color: #091133;
+}
+.JOT-comment-div p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 40px;
+  letter-spacing: 1px;
+  color: #091133;
+}
+.JOT-comment-div img {
+  width: 30%;
+  border-radius: 10%;
+  padding: 5vh 0;
+}
+.pic-ao-dai {
+  width: 70% !important;
+}
+
+
+/* responsive */
+@media screen and (max-width: 800px) {
+  .intro img {
+    width: 90%;
+  }
+  .member-intro {
+    width: 80%;
+  }
+  .founder-comment-div {
+    width: 100%;
+  }
+  .founder-pics-div {
+    width: 100%;
+    text-align: center;
+  }
+  .founder-pics-comp {
+    display: inline-block;
+    width: 30%;
+  }
+  .pic-ao-dai {
+    width: 50% !important;
+  }
+  .wavePic img {
+    height: 15vh;
+  }
+  .JOT-pic {
+    width: 100%;
+    padding: 0;
+  }
+  .JOT-comment-div {
+    width: 90%;
+  }
 }
