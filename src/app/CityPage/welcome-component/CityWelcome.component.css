@@ -25,3 +25,8 @@
         display: block;
     }
 }
+
+.view-header-big {
+  font-size: 70px;
+  font-weight: bold;
+}

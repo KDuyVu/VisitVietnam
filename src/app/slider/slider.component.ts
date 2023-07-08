@@ -61,10 +61,13 @@ export class SliderComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sliderNumber) {
-      this.numberOfCity = changes.sliderNumber.currentValue;
+      this.numberOfCity = changes.sliderNumber.currentValue - 1;
     }
   }
   getSliderHtml(): SafeHtml {
+    if (!this.sliderNumber) {
+      return null;
+    }
     if (this.images.length > this.numberOfCity) {
       return this.sanitizer.bypassSecurityTrustHtml(this.images[this.numberOfCity].html);
     }

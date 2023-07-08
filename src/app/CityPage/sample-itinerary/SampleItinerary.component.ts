@@ -46,7 +46,9 @@ export class SampleItineraryComopnent implements OnChanges, OnInit {
     let line: SampleItinerary[] = [];
     let idLine: string[] = [];
     let cnt: number = 0;
-
+    if (!this.itineraries) {
+      return;
+    }
     this.itineraries.forEach(
       (itinerary) => {
         ++cnt;
