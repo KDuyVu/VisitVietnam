@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { City } from 'src/app/service/CityService.service';
 
 @Component({
@@ -10,15 +10,14 @@ export class WeatherComponent implements OnChanges {
   @Input() city: City = null;
   myScriptElement: HTMLScriptElement;
 
-  constructor() {
-    this.myScriptElement = document.createElement('script');
-    this.myScriptElement.src =
-      'https://app1.weatherwidget.org/js/?id=ww_757c2bc9d43ee';
-    this.myScriptElement.async = true;
-    document.body.appendChild(this.myScriptElement);
-  } 
-
   ngOnChanges(changes: SimpleChanges): void {
+    if ('city' in changes) {
+      if (!this.city) {
+        return;
+      }
+      console.log("city changes ",this.city);
+      this.createSrc();
+    }
   }
 
   getA(): string {
@@ -44,5 +43,14 @@ export class WeatherComponent implements OnChanges {
       "cl_font":"#000000",
       "width":"30vw"
     }`;
+  }
+
+  private createSrc() {
+    this.myScriptElement = document.createElement('script');
+    this.myScriptElement.id = 'weather-script';
+    this.myScriptElement.src =
+      'https://app1.weatherwidget.org/js/?id=ww_757c2bc9d43ee';
+    this.myScriptElement.async = true;
+    document.body.appendChild(this.myScriptElement);
   }
 }
